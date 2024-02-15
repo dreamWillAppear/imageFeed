@@ -30,6 +30,7 @@ extension ImagesListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
 
         guard let imageListCell = cell as? ImagesListCell else {
+            print("ImagesListViewController - EMPTY CELL SHOWN!")
             return UITableViewCell()
         }
         configCell(for: imageListCell, with: indexPath)
