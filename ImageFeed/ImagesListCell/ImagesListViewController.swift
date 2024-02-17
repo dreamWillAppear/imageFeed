@@ -4,7 +4,7 @@ class ImagesListViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView!
     
-    private  let photosName: [String] = Array(0...20).map{"\($0)"}
+    private  let photosName: [String] = Array(0...19).map{"\($0)"}
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -17,7 +17,6 @@ class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.rowHeight = 200
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
 }
 
@@ -43,12 +42,7 @@ extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else { return 0 }
-        let imageInset = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        let imageWidth = image.size.width
-        let imageViewWidth = tableView.bounds.width - imageInset.left - imageInset.right
-        let scale = imageViewWidth / imageWidth
-        let cellHieght = image.size.height * scale + imageInset.top + imageInset.bottom
-        return cellHieght
+        return image.size.height * (tableView.bounds.width / image.size.width)
     }
 }
 
