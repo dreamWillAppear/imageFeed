@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!-- ImageList-->
+        <!--Images List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title=" ImageList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" sceneMemberID="viewController">
+                <viewController title=" ImageList" id="BYZ-38-t0r" userLabel="Images List View Controller" customClass="ImagesListViewController" customModule="ImageFeed" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,12 +96,94 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57.971014492753625" y="-34.151785714285715"/>
+            <point key="canvasLocation" x="262" y="-115"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="1dJ-zm-ag6">
+            <objects>
+                <viewController id="h9U-JO-TX7" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z6r-qt-Wy2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User Mock Photo" translatesAutoresizingMaskIntoConstraints="NO" id="0IC-Im-ZWs" userLabel="Profile Photo">
+                                <rect key="frame" x="16" y="80" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="AEE-qP-yMX"/>
+                                    <constraint firstAttribute="height" constant="70" id="Q5k-pt-98J"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmb-WO-Qje" userLabel="User Name">
+                                <rect key="frame" x="16" y="158" width="234" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="OdJ-uu-X7w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <color key="textColor" name="YP White"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OF4-YR-pcx" userLabel="@username">
+                                <rect key="frame" x="16" y="184" width="129" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="Gtf-52-l1o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor">
+                                    <string key="name">
+YP Gray</string>
+                                </color>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, world!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTi-Nz-ioK" userLabel="Profile Description">
+                                <rect key="frame" x="16" y="210" width="95" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="SRB-iA-RWn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="YP White"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCL-aC-tNa" userLabel="Logout Button">
+                                <rect key="frame" x="368" y="104" width="20" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Cpb-d5-BrL"/>
+                                    <constraint firstAttribute="height" constant="22" id="bGL-ew-N1w"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Logout Button" title=""/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="d9h-ed-Ak3"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="0IC-Im-ZWs" firstAttribute="top" secondItem="d9h-ed-Ak3" secondAttribute="top" constant="32" id="3zj-1H-0r8"/>
+                            <constraint firstItem="OF4-YR-pcx" firstAttribute="leading" secondItem="d9h-ed-Ak3" secondAttribute="leading" constant="16" id="C0n-7L-XXD"/>
+                            <constraint firstItem="nmb-WO-Qje" firstAttribute="top" secondItem="0IC-Im-ZWs" secondAttribute="bottom" constant="8" id="J2i-I9-6Ry"/>
+                            <constraint firstItem="YTi-Nz-ioK" firstAttribute="top" secondItem="OF4-YR-pcx" secondAttribute="bottom" constant="8" id="KkN-Ey-Qj2"/>
+                            <constraint firstItem="OF4-YR-pcx" firstAttribute="top" secondItem="nmb-WO-Qje" secondAttribute="bottom" constant="8" id="SpF-LZ-PYd"/>
+                            <constraint firstItem="YTi-Nz-ioK" firstAttribute="leading" secondItem="d9h-ed-Ak3" secondAttribute="leading" constant="16" id="cA1-1B-F8L"/>
+                            <constraint firstItem="UCL-aC-tNa" firstAttribute="top" secondItem="d9h-ed-Ak3" secondAttribute="top" constant="56" id="dBw-QI-pbg"/>
+                            <constraint firstItem="0IC-Im-ZWs" firstAttribute="leading" secondItem="d9h-ed-Ak3" secondAttribute="leading" constant="16" id="fzh-sv-1Br"/>
+                            <constraint firstItem="d9h-ed-Ak3" firstAttribute="trailing" secondItem="UCL-aC-tNa" secondAttribute="trailing" constant="26" id="mhy-jL-bh2"/>
+                            <constraint firstItem="nmb-WO-Qje" firstAttribute="leading" secondItem="d9h-ed-Ak3" secondAttribute="leading" constant="16" id="oQw-cO-7Ed"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kid-6Z-qoX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-397" y="-114"/>
         </scene>
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Like Button Active" width="42" height="42"/>
+        <image name="Logout Button" width="24" height="24"/>
+        <image name="User Mock Photo" width="70" height="70"/>
+        <namedColor>
+            <string key="name">
+YP Gray</string>
+            <color red="0.68235294117647061" green="0.68627450980392157" blue="0.70588235294117652" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
