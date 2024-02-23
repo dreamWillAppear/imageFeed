@@ -73,15 +73,31 @@
 			children = (
 				FD36AEBA2B70292300E145AE /* AppDelegate.swift */,
 				FD36AEBC2B70292300E145AE /* SceneDelegate.swift */,
+				FD52CAED2B892009006C41E1 /* ProfileView */,
 				169A004B2B78BD7B00CCA16D /* ImagesListCell */,
-				16D22C432B8257A300099C75 /* SingleImageViewController.swift */,
-				16D3FBE22B8108BC00C4F96F /* ProfileViewController.swift */,
+				FD52CAEC2B891FDA006C41E1 /*  SingleImageView */,
 				FD36AEC52B70292400E145AE /* LaunchScreen.storyboard */,
 				FD36AEC02B70292300E145AE /* Main.storyboard */,
 				FD36AEC32B70292400E145AE /* Assets.xcassets */,
 				FD36AEC82B70292400E145AE /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		FD52CAEC2B891FDA006C41E1 /*  SingleImageView */ = {
+			isa = PBXGroup;
+			children = (
+				16D22C432B8257A300099C75 /* SingleImageViewController.swift */,
+			);
+			path = " SingleImageView";
+			sourceTree = "<group>";
+		};
+		FD52CAED2B892009006C41E1 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				16D3FBE22B8108BC00C4F96F /* ProfileViewController.swift */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
