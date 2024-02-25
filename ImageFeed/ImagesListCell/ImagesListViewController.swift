@@ -6,7 +6,6 @@ class ImagesListViewController: UIViewController {
     
     private let photosName: [String] = Array(0...19).map{"\($0)"}
     private let showSingleImage = "ShowSingleImage"
-    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
