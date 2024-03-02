@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
         setConstraints()
     }
     
+    
     private func setProfileImageStyle() {
         profilePhoto.image = UIImage(named: "User Mock Photo")
         view.addSubview(profilePhoto)
@@ -43,7 +44,7 @@ class ProfileViewController: UIViewController {
     
     private func setProfileDescription() {
         profileDescription.text = "Hello, world!"
-        profileDescription.font = .systemFont(ofSize: 13)
+        profileDescription.font = .systemFont (ofSize: 13)
         profileDescription.textColor = .ypWhite
         view.addSubview(profileDescription)
         
@@ -57,6 +58,8 @@ class ProfileViewController: UIViewController {
         
         logoutButton.tintColor = .ypRed
         view.addSubview(logoutButton)
+        logoutButton.imageView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        logoutButton.imageView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
     }
     
     private func setConstraints() {
@@ -65,7 +68,7 @@ class ProfileViewController: UIViewController {
         nickname.translatesAutoresizingMaskIntoConstraints = false
         profileDescription.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        
+    
         NSLayoutConstraint.activate([
             //profilePhoto
             profilePhoto.widthAnchor.constraint(equalToConstant: 70),
@@ -86,8 +89,10 @@ class ProfileViewController: UIViewController {
             profileDescription.leadingAnchor.constraint(equalTo: nickname.leadingAnchor),
             
             //logoutButton
-            logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55),
-            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24)
+            logoutButton.widthAnchor.constraint(equalToConstant: 44),
+            logoutButton.heightAnchor.constraint(equalToConstant: 44),
+            logoutButton.centerYAnchor.constraint(equalTo: profilePhoto.centerYAnchor),
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15.66)
         ])
     }
     
