@@ -6,6 +6,7 @@ enum Constants {
     static let reirecrtURI = "urn:ietf:wg:oauth:2.0:oob"
     static let accessScope = "public+read_user_access+write_likes_access"
     static let defaultBaseURL = URL(string: "https://api.unsplash.com/")
+    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }
 
 
