@@ -131,14 +131,14 @@
                                     <constraint firstAttribute="height" constant="60" id="p2i-2i-KAU"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAv-2K-I0c">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAv-2K-I0c">
                                 <rect key="frame" x="35.5" y="724" width="343" height="48"/>
                                 <color key="backgroundColor" name="YP White"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="bEa-4c-RBX"/>
                                     <constraint firstAttribute="width" constant="343" id="fj5-DT-ape"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Войти">
                                     <color key="titleColor" name="YP Black"/>
@@ -150,7 +150,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="4vE-bA-Olg" kind="presentation" identifier="ShowWebView" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="3ty-a6-ql7"/>
+                                    <segue destination="4vE-bA-Olg" kind="presentation" identifier="" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="3ty-a6-ql7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -185,24 +185,40 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkY-Zv-Tbg" userLabel="Backward Button">
+                                <rect key="frame" x="8" y="45" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="a2V-ul-S0e"/>
+                                    <constraint firstAttribute="width" constant="44" id="rxq-tB-E7l"/>
+                                </constraints>
+                                <color key="tintColor" name="YP Black"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Backward Button"/>
+                                <connections>
+                                    <action selector="didTapBackwardButton:" destination="4vE-bA-Olg" eventType="touchUpInside" id="5Ib-n0-PTo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ucj-F8-3l7"/>
                         <color key="backgroundColor" name="YP White"/>
                         <constraints>
+                            <constraint firstItem="dkY-Zv-Tbg" firstAttribute="leading" secondItem="vMx-Vr-f7m" secondAttribute="leading" constant="8" id="6eH-cj-XBN"/>
                             <constraint firstItem="CXg-1H-9FP" firstAttribute="top" secondItem="vMx-Vr-f7m" secondAttribute="top" constant="87" id="CXM-ND-muh"/>
                             <constraint firstItem="ucj-F8-3l7" firstAttribute="trailing" secondItem="CXg-1H-9FP" secondAttribute="trailing" id="FMm-S1-HlP"/>
+                            <constraint firstItem="dkY-Zv-Tbg" firstAttribute="top" secondItem="vMx-Vr-f7m" secondAttribute="top" constant="45" id="KTe-0j-aWG"/>
                             <constraint firstItem="CXg-1H-9FP" firstAttribute="leading" secondItem="ucj-F8-3l7" secondAttribute="leading" id="deJ-Wb-hUW"/>
                             <constraint firstAttribute="bottom" secondItem="CXg-1H-9FP" secondAttribute="bottom" id="hX3-GV-fn9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" style="editor" id="VDa-AM-nXJ"/>
                     <connections>
+                        <outlet property="backwardButton" destination="dkY-Zv-Tbg" id="ZmS-Cg-kot"/>
                         <outlet property="webView" destination="CXg-1H-9FP" id="6nM-On-HjX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2J-8I-omA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3177" y="-1002"/>
+            <point key="canvasLocation" x="3176.811594202899" y="-1002.4553571428571"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZGB-zU-0B1">
@@ -349,7 +365,7 @@
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Auth Screen Logo" width="60" height="60"/>
-        <image name="Backward Button" width="9" height="16"/>
+        <image name="Backward Button" width="24" height="24"/>
         <image name="Like Button Active" width="42" height="42"/>
         <image name="Sharing Button" width="51" height="51"/>
         <image name="Tab Editorial Active" width="30" height="30"/>
