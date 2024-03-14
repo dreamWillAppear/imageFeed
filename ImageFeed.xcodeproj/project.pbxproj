@@ -17,6 +17,8 @@
 		FD36AEC22B70292300E145AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD36AEC02B70292300E145AE /* Main.storyboard */; };
 		FD36AEC42B70292400E145AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD36AEC32B70292400E145AE /* Assets.xcassets */; };
 		FD36AEC72B70292400E145AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD36AEC52B70292400E145AE /* LaunchScreen.storyboard */; };
+		FDA458952B97E6E600E3DC77 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA458942B97E6E600E3DC77 /* WebViewViewController.swift */; };
+		FDA458972B97E9BC00E3DC77 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA458962B97E9BC00E3DC77 /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		FD36AEC32B70292400E145AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD36AEC62B70292400E145AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD36AEC82B70292400E145AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDA458942B97E6E600E3DC77 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		FDA458962B97E9BC00E3DC77 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				16C553662B94F64E00172353 /* Constants.swift */,
 				FD36AEBA2B70292300E145AE /* AppDelegate.swift */,
 				FD36AEBC2B70292300E145AE /* SceneDelegate.swift */,
+				FDA4588F2B97C96300E3DC77 /* Auth */,
 				FD52CAED2B892009006C41E1 /* ProfileView */,
 				169A004B2B78BD7B00CCA16D /* ImagesListCell */,
 				FD52CAEC2B891FDA006C41E1 /*  SingleImageView */,
@@ -101,6 +106,15 @@
 				16D3FBE22B8108BC00C4F96F /* ProfileViewController.swift */,
 			);
 			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		FDA4588F2B97C96300E3DC77 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FDA458962B97E9BC00E3DC77 /* AuthViewController.swift */,
+				FDA458942B97E6E600E3DC77 /* WebViewViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +194,8 @@
 				FD36AEBB2B70292300E145AE /* AppDelegate.swift in Sources */,
 				16C553672B94F64E00172353 /* Constants.swift in Sources */,
 				16D22C442B8257A300099C75 /* SingleImageViewController.swift in Sources */,
+				FDA458952B97E6E600E3DC77 /* WebViewViewController.swift in Sources */,
+				FDA458972B97E9BC00E3DC77 /* AuthViewController.swift in Sources */,
 				FD36AEBD2B70292300E145AE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
