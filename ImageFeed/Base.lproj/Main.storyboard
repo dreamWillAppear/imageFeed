@@ -150,7 +150,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="4vE-bA-Olg" kind="presentation" identifier="" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="3ty-a6-ql7"/>
+                                    <segue destination="4vE-bA-Olg" kind="modal" identifier="showWebView" modalPresentationStyle="fullScreen" id="3ty-a6-ql7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -163,11 +163,11 @@
                             <constraint firstItem="BAv-2K-I0c" firstAttribute="bottom" secondItem="rWp-SO-yjI" secondAttribute="bottom" constant="-124" id="HsV-hs-NKY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pVk-6u-qbX"/>
+                    <navigationItem key="navigationItem" style="browser" id="pVk-6u-qbX"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQN-pp-Jc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2435" y="-1002"/>
+            <point key="canvasLocation" x="2494" y="-1002"/>
         </scene>
         <!--WebViewViewController-->
         <scene sceneID="mVU-3Y-cXe">
@@ -218,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2J-8I-omA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3176.811594202899" y="-1002.4553571428571"/>
+            <point key="canvasLocation" x="3316" y="-1002"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZGB-zU-0B1">
