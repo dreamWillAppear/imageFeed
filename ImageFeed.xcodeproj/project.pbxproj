@@ -23,6 +23,7 @@
 		FD36AEC22B70292300E145AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD36AEC02B70292300E145AE /* Main.storyboard */; };
 		FD36AEC42B70292400E145AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD36AEC32B70292400E145AE /* Assets.xcassets */; };
 		FD36AEC72B70292400E145AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD36AEC52B70292400E145AE /* LaunchScreen.storyboard */; };
+		FDA4589B2BACF34E00E3DC77 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4589A2BACF34E00E3DC77 /* URLSession+data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		FD36AEC32B70292400E145AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD36AEC62B70292400E145AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD36AEC82B70292400E145AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDA4589A2BACF34E00E3DC77 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				16C5536B2B9C5BD300172353 /* WebViewViewController.swift */,
 				163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */,
 				1602DB2E2BA64C5700C221E7 /* OAuth2TokenStorage.swift */,
+				FDA4589A2BACF34E00E3DC77 /* URLSession+data.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA4589B2BACF34E00E3DC77 /* URLSession+data.swift in Sources */,
 				FD36AEBF2B70292300E145AE /* ImagesListViewController.swift in Sources */,
 				16C5536E2B9C873000172353 /* WebViewViewControllerDelegateProtocol.swift in Sources */,
 				169A004A2B78BD4200CCA16D /* ImagesListCell.swift in Sources */,

@@ -33,7 +33,6 @@ class WebViewViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         webView.removeObserver(self, forKeyPath:
                                 #keyPath(WKWebView.estimatedProgress), context: nil)
     }
@@ -45,7 +44,7 @@ class WebViewViewController: UIViewController {
         
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.reirecrtURI),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirecrtURI),
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]

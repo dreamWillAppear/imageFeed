@@ -28,7 +28,7 @@ extension URLSession {
             } else if let error = error {
                 fulfillCompletionOnTheMainThread(.failure(NetworkError.urlRequestError(error)))
             } else {
-                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError)) 
+                fulfillCompletionOnTheMainThread(.failure(NetworkError.urlSessionError))
             }
         })
         

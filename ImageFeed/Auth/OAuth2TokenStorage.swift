@@ -5,7 +5,7 @@ final class OAuth2TokenStorage {
     
     private init() {}
     
-    //token записывается в методе fetchOAuthToken класса OAuth2Service
+    //token записывается в методе webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) класса AuthViewController
     var token: String? {
         get {
             UserDefaults.standard.string(forKey: "ImageFeedAuthToken")
@@ -14,5 +14,4 @@ final class OAuth2TokenStorage {
             UserDefaults.standard.setValue(newValue, forKey: "ImageFeedAuthToken")
         }
     }
-    
 }

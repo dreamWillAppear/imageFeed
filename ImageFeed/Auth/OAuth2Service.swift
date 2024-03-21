@@ -3,66 +3,55 @@ import UIKit
 
 final class OAuth2Service {
     static let shared = OAuth2Service()
+    let urlSession = URLSession(configuration: .default)
     private init() {}
+    
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
-        let urlString = "https://unsplash.com/oauth/token" +
-        "?client_id=\(AccessKey)" +
-        "&client_secret=\(SecretKey)" +
-        "&redirect_uri=\(RedirectURI)" +
-        "&code=\(code)" +
-        "&grant_type=\(GrandType)"
-        
-        guard let url = URL(string: urlString) else {
+        guard var urlString = URLComponents(string: Constants.unsplashTokenRequestBaseURLString) else { return nil }
+        urlString.queryItems = [
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "client_secret", value: Constants.secretKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirecrtURI),
+            URLQueryItem(name: "code", value: code),
+            URLQueryItem(name: "grant_type", value: Constants.grandType)
+        ]
+        guard let url = urlString.url else {
             print("Failed to create URL with baseURL and parameters.")
             return nil
         }
-        print(code)
-        print(urlString)
         var request = URLRequest(url: url)
-        
         request.httpMethod = "POST"
         return request
     }
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String,Error>) -> Void) {
         guard let urlRequest = makeOAuthTokenRequest(code: code) else { return }
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if let error = error {
-                print("error1")
-                completion(.failure(error))
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
-                let error = NSError(domain: "HTTP", code: (response as? HTTPURLResponse)?.statusCode ?? -1, userInfo: nil)
-                DispatchQueue.main.async {
-                    print("error2")
-                    completion(.failure(error))
-                }
-                return
-            }
-            
-            guard let data = data else {
-                let error = NSError(domain: "Data", code: -1, userInfo: nil)
-                print("error3")
-                completion(.failure(error))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                // Сохраняем полученный токен в хранилище
-                print(response)
-                DispatchQueue.main.async {
-                    print("error4")
-                    completion(.success(response.accessToken))
-                   
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    print("error5")
-                    completion(.failure(error))
+        let decoder = JSONDecoder()
+        
+        let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+            if
+                let data = data,
+                let statusCode =  (response as? HTTPURLResponse)?.statusCode {
+                switch statusCode {
+                    case 200...299:
+                        print("fetchOAuthToken - Status Code = \(statusCode)")
+                        do {
+                            let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                            DispatchQueue.main.async {
+                                completion(.success(response.accessToken))
+                            }
+                        } catch {
+                            DispatchQueue.main.async {
+                                print("fetchOAuthToken error: \(String(describing: error))")
+                                completion(.failure(error))
+                            }
+                        }
+                    default:
+                        guard let error = error else { return }
+                        print("fetchOAuthToken - Status Code = \(statusCode) \n fetchOAuthToken error: \(String(describing: error))")
+                        DispatchQueue.main.async {
+                            completion(.failure(error))
+                        }
                 }
             }
         }
