@@ -10,8 +10,6 @@ enum Constants {
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     static let unsplashTokenRequestBaseURLString = "https://unsplash.com/oauth/token"
     static let grandType = "authorization_code"
-
-
 }
 
 

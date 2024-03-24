@@ -8,17 +8,17 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        /* отладочное
-        UserDefaults.standard.setValue("test", forKey: OAuth2TokenStorage.shared.tokenKey)
-        UserDefaults.standard.removeObject(forKey: OAuth2TokenStorage.shared.tokenKey)
-        */
+        //отладочное
+        //UserDefaults.standard.setValue("test", forKey: OAuth2TokenStorage.shared.tokenKey)
+        //UserDefaults.standard.removeObject(forKey: OAuth2TokenStorage.shared.tokenKey)
+        
         completedAuthorizationCheck(accessToken: OAuth2TokenStorage.shared.token)
         
     }
     
     private func completedAuthorizationCheck(accessToken: String?) {
         
-        if let token = accessToken {
+        if let _ = accessToken {
             switchToTabBarController()
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: self)
@@ -36,7 +36,7 @@ class SplashViewController: UIViewController {
         // Создаём экземпляр нужного контроллера из Storyboard с помощью ранее заданного идентификатора
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
-           
+        
         // Установим в `rootViewController` полученный контроллер
         window.rootViewController = tabBarController
     }
@@ -45,7 +45,7 @@ class SplashViewController: UIViewController {
 
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == showAuthenticationScreenSegueIdentifier {
             
             guard
@@ -60,7 +60,7 @@ extension SplashViewController {
             
         } else {
             super.prepare(for: segue, sender: sender)
-           }
+        }
     }
 }
 

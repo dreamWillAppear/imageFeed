@@ -30,7 +30,6 @@ extension AuthViewController: WebViewViewControllerDelegateProtocol {
             case .success(let token):
                 self.oAuth2TokenStorage.token = token
                 self.delegate?.didAuthenticate(self)
-                print("Access token is \(UserDefaults.standard.string(forKey: "ImageFeedAuthToken")!)")
             case .failure(let error):
                 print("AuthViewController webViewViewController (33) - Token request failed: \(error.localizedDescription)")
             }
