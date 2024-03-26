@@ -2,13 +2,23 @@ import UIKit
 import WebKit
 
 class WebViewViewController: UIViewController {
-
+    
+    //MARK: - Public Properties
+    
     weak var delegate: WebViewViewControllerDelegateProtocol?
-    private var progressView = UIProgressView()
+    
+    //MARK: - IBOutlet
     
     @IBOutlet private var webView: WKWebView!
     @IBOutlet private var backwardButton: UIButton!
     
+    //MARK: - Private Properties
+    
+    private var progressView = UIProgressView()
+    
+    
+    
+    //MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +47,26 @@ class WebViewViewController: UIViewController {
                                 #keyPath(WKWebView.estimatedProgress), context: nil)
     }
     
- 
+    override func observeValue(
+        forKeyPath keyPath:
+        String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+            if keyPath == #keyPath(WKWebView.estimatedProgress) {
+                updateProgress()
+            } else {
+                super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            }
+        }
+    
+    //MARK: - IBAction
+    
+    @IBAction func didTapBackwardButton(_ sender: Any) {
+        delegate?.webViewViewControllerDidCancel(self)
+        
+    }
+    
+    //MARK: - Private Methods
     
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else { return }
@@ -57,30 +86,13 @@ class WebViewViewController: UIViewController {
         webView.load(request)
     }
     
-    @IBAction func didTapBackwardButton(_ sender: Any) {
-        delegate?.webViewViewControllerDidCancel(self)
-        
-    }
-    
-    override func observeValue(
-        forKeyPath keyPath:
-        String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            if keyPath == #keyPath(WKWebView.estimatedProgress) {
-                updateProgress()
-            } else {
-                super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            }
-        }
-    
     private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
+        progressView.setProgress(Float(webView.estimatedProgress), animated: true)
         progressView.isHidden = fabs(webView.estimatedProgress - 1) <= 0.0001
     }
     
     private func configureProgressView() {
-        progressView.progressViewStyle = .bar
+        progressView.progressViewStyle = .default
         progressView.progressTintColor = .black
         
     }
@@ -107,7 +119,9 @@ class WebViewViewController: UIViewController {
         ])
     }
 }
-    
+
+//MARK: - WKNavigationDelegate
+
 extension WebViewViewController: WKNavigationDelegate {
     
     func code(from navigationAction: WKNavigationAction) -> String? {
@@ -126,8 +140,8 @@ extension WebViewViewController: WKNavigationDelegate {
             print("code is nil")
             return nil
         }
-}
-
+    }
+    
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,

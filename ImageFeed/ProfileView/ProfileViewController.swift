@@ -2,16 +2,22 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    // MARK: - Private Methods
+    
     private let profilePhoto = UIImageView()
     private let username = UILabel()
     private let nickname = UILabel()
     private let profileDescription = UILabel()
     private var logoutButton = UIButton()
     
+    // MARK: - Public Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIProfileViewController()
     }
+    
+    // MARK: - Private Methods
     
     private func setUIProfileViewController() {
         setProfileImageStyle()
@@ -21,7 +27,6 @@ class ProfileViewController: UIViewController {
         setLogoutButton()
         setConstraints()
     }
-    
     
     private func setProfileImageStyle() {
         profilePhoto.image = UIImage(named: "User Mock Photo")
@@ -68,7 +73,7 @@ class ProfileViewController: UIViewController {
         nickname.translatesAutoresizingMaskIntoConstraints = false
         profileDescription.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         NSLayoutConstraint.activate([
             //profilePhoto
             profilePhoto.widthAnchor.constraint(equalToConstant: 70),
@@ -95,6 +100,8 @@ class ProfileViewController: UIViewController {
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15.66)
         ])
     }
+    
+    //MARK: - @objc
     
     @objc
     private func didTapLogoutButton() {

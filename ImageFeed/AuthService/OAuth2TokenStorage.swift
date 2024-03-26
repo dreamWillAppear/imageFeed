@@ -3,7 +3,8 @@ import UIKit
 final class OAuth2TokenStorage {
     
     static let shared = OAuth2TokenStorage()
-    internal let tokenKey = "ImageFeedAuthToken"
+    
+    let tokenKey = "ImageFeedAuthToken"
     
     private init() {}
     
