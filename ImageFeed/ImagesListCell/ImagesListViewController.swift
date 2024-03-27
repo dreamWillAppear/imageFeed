@@ -1,8 +1,12 @@
 import UIKit
 
 class ImagesListViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet private var tableView: UITableView!
+    
+    // MARK: - Private Properties
     
     private let photosName: [String] = Array(0...19).map{"\($0)"}
     private let showSingleImage = "ShowSingleImage"
@@ -12,6 +16,8 @@ class ImagesListViewController: UIViewController {
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,8 @@ class ImagesListViewController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDataSource
+
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photosName.count
@@ -42,7 +50,7 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-
+        
         guard let imageListCell = cell as? ImagesListCell else {
             print("ImagesListViewController - EMPTY CELL SHOWN!")
             return UITableViewCell()
@@ -51,6 +59,8 @@ extension ImagesListViewController: UITableViewDataSource {
         return imageListCell
     }
 }
+
+//MARK: - UITableViewDelegate
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -63,12 +73,14 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - configCell
+
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let isLiked = indexPath.row % 2 == 0
         let likeImage = isLiked ? UIImage(named: "Like Button Active") : UIImage(named: "Like Button Inactive")
-    
-       guard let image = UIImage(named: photosName[indexPath.row]) else {
+        
+        guard let image = UIImage(named: photosName[indexPath.row]) else {
             return
         }
         cell.imageCell.image = image
