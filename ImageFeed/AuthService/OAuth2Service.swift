@@ -1,5 +1,9 @@
 import Foundation
 
+enum AuthServiceError: Error {
+    case invalidRequest
+}
+
 final class OAuth2Service {
     
     // MARK: - Public Properties
@@ -9,40 +13,57 @@ final class OAuth2Service {
     // MARK: - Private Properties
     
     private let urlSession = URLSession(configuration: .default)
+    private var task: URLSessionTask?
+    private var lastCode: String?
     
     // MARK: - Public Methods
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String,Error>) -> Void) {
-        guard let urlRequest = makeOAuthTokenRequest(code: code) else { return }
+        assert(Thread.isMainThread)
+        
+        guard lastCode != code  else {
+            DispatchQueue.main.async {
+                completion(.failure(AuthServiceError.invalidRequest))
+            }
+            return
+        }
+        
+        lastCode = code
+        
+        guard let urlRequest = makeOAuthTokenRequest(code: code)
+        else {
+            completion(.failure(AuthServiceError.invalidRequest))
+            return
+        }
+        
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
-            if
-                let data = data,
-                let statusCode =  (response as? HTTPURLResponse)?.statusCode {
-                switch statusCode {
-                case 200...299:
-                    print("fetchOAuthToken - Status Code = \(statusCode)")
-                    do {
-                        let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                        DispatchQueue.main.async {
-                            completion(.success(response.accessToken))
-                        }
-                    } catch {
-                        DispatchQueue.main.async {
-                            print("fetchOAuthToken error: \(String(describing: error))")
-                            completion(.failure(error))
-                        }
-                    }
-                default:
-                    guard let error = error else { return }
-                    print("fetchOAuthToken - Status Code = \(statusCode) \n fetchOAuthToken error: \(String(describing: error))")
-                    DispatchQueue.main.async {
-                        completion(.failure(error))
+            DispatchQueue.main.async {
+                if
+                    let data = data,
+                    let statusCode =  (response as? HTTPURLResponse)?.statusCode {
+                    switch statusCode {
+                        case 200...299:
+                            print("fetchOAuthToken - Status Code = \(statusCode)")
+                            do {
+                                let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                                    completion(.success(response.accessToken))
+                            } catch {
+                                    print("fetchOAuthToken error: \(String(describing: error))")
+                                    completion(.failure(error))
+                            }
+                        default:
+                            guard let error = error else { return }
+                            print("fetchOAuthToken - Status Code = \(statusCode) \n fetchOAuthToken error: \(String(describing: error))")
+                                completion(.failure(error))
                     }
                 }
+                self.task = nil
+                self.lastCode = nil
             }
         }
+        self.task = task
         task.resume()
     }
     
@@ -67,6 +88,5 @@ final class OAuth2Service {
         request.httpMethod = "POST"
         return request
     }
-    
     
 }

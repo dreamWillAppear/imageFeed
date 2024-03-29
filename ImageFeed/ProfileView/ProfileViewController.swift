@@ -2,13 +2,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    // MARK: - Private Methods
+    // MARK: - Private Properties
     
     private let profilePhoto = UIImageView()
     private let username = UILabel()
     private let nickname = UILabel()
     private let profileDescription = UILabel()
     private var logoutButton = UIButton()
+    private let appDelegate = AppDelegate()
     
     // MARK: - Public Methods
     
@@ -106,5 +107,7 @@ class ProfileViewController: UIViewController {
     @objc
     private func didTapLogoutButton() {
         print("ProfileViewController: - Did tap Logout Button!")
+        UserDefaults.standard.removeObject(forKey: OAuth2TokenStorage.shared.tokenKey)
+        appDelegate.resetApp()
     }
 }

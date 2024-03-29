@@ -22,6 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    //https://stackoverflow.com/questions/52275684/how-can-i-restart-an-application-programmatically-in-swift-on-ios
+    func resetApp() {
+        UIApplication.shared.windows[0].rootViewController = UIStoryboard(
+            name: "Main",
+            bundle: nil
+            ).instantiateInitialViewController()
+    }
     
 }
 

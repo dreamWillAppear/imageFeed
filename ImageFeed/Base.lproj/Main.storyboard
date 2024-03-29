@@ -32,6 +32,7 @@
                             <constraint firstItem="xo7-zb-ntv" firstAttribute="centerY" secondItem="VkB-ps-y9k" secondAttribute="centerY" id="soa-FA-pS2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="GYy-yV-VLp"/>
                     <connections>
                         <segue destination="HyS-sV-KBH" kind="modal" identifier="showAuthView" modalPresentationStyle="fullScreen" id="oi1-Dz-Pxw"/>
                     </connections>
