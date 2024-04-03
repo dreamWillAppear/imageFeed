@@ -18,7 +18,7 @@ final class OAuth2Service {
     
     // MARK: - Public Methods
     
-    func fetchOAuthToken(code: String, completion: @escaping (Result<String,Error>) -> Void) {
+    func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         
         guard lastCode != code  else {

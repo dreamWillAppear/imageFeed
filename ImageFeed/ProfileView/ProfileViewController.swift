@@ -5,51 +5,90 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Properties
     
     private let profilePhoto = UIImageView()
-    private let username = UILabel()
-    private let nickname = UILabel()
+    private var nameLabel = UILabel()
+    private var username = UILabel()
     private let profileDescription = UILabel()
     private var logoutButton = UIButton()
     private let appDelegate = AppDelegate()
+    private let profileInfo = ProfileService.shared.profile
+    private var profileImageObserver: NSObjectProtocol?
     
     // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIProfileViewController()
+        
     }
+    
     
     // MARK: - Private Methods
     
+    private func addObserver() {
+        profileImageObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main,
+                using: { [weak self] _ in
+                    guard let self = self else { return }
+                    self.setProfileImage()
+                }
+            )
+    }
+    
+    private func setProfileImage() {
+        guard
+            let profileImageURL = ProfileImageService.shared.profileImageURL,
+            let url = URL(string: profileImageURL)
+        else {
+            print("ProfileViewController setProfileImage(45) - profileImageURL is nil!")
+            return
+        }
+        //TODO use kingfisher
+    }
+    
     private func setUIProfileViewController() {
-        setProfileImageStyle()
-        setProfileUsername()
-        setProfileNickname()
-        setProfileDescription()
+        updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
+        setProfilePhotoStyle()
+        setProfileNameLabelStyle()
+        setProfileUsernameStyle()
+        setProfileDescriptionStyle()
         setLogoutButton()
         setConstraints()
     }
     
-    private func setProfileImageStyle() {
+    private func setProfilePhotoStyle() {
         profilePhoto.image = UIImage(named: "User Mock Photo")
         view.addSubview(profilePhoto)
     }
     
-    private func setProfileUsername() {
-        username.text = "Екатерина Новикова"
-        username.font = .boldSystemFont(ofSize: 23)
-        username.textColor = .ypWhite
+    private func updateProfileDetails(profile: ProfileModel?) {
+        
+        guard let profile else
+        {
+            print("ProfileViewController updateProfileDetails (58) - Failed to get data from ProfileService!")
+            return
+        }
+        
+        username.text = "@" + profile.username
+        nameLabel.text = profile.nameLabel
+        profileDescription.text = profile.bio
+    }
+    
+    private func setProfileNameLabelStyle() {
+        nameLabel.font = .boldSystemFont(ofSize: 23)
+        nameLabel.textColor = .ypWhite
+        view.addSubview(nameLabel)
+    }
+    
+    private func setProfileUsernameStyle() {
+        username.font = .systemFont(ofSize: 13)
+        username.textColor = .ypGray
         view.addSubview(username)
     }
     
-    private func setProfileNickname() {
-        nickname.text = "@ekaterina_nov"
-        nickname.font = .systemFont(ofSize: 13)
-        nickname.textColor = .ypGray
-        view.addSubview(nickname)
-    }
-    
-    private func setProfileDescription() {
-        profileDescription.text = "Hello, world!"
+    private func setProfileDescriptionStyle() {
         profileDescription.font = .systemFont (ofSize: 13)
         profileDescription.textColor = .ypWhite
         view.addSubview(profileDescription)
@@ -70,8 +109,8 @@ class ProfileViewController: UIViewController {
     
     private func setConstraints() {
         profilePhoto.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         username.translatesAutoresizingMaskIntoConstraints = false
-        nickname.translatesAutoresizingMaskIntoConstraints = false
         profileDescription.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,17 +121,17 @@ class ProfileViewController: UIViewController {
             profilePhoto.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             profilePhoto.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             
-            //username
-            username.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 8),
-            username.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
+            //nameLabel
+            nameLabel.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 8),
+            nameLabel.leadingAnchor.constraint(equalTo: profilePhoto.leadingAnchor),
             
             //nickname
-            nickname.topAnchor.constraint(equalTo: username.bottomAnchor, constant: 8),
-            nickname.leadingAnchor.constraint(equalTo: username.leadingAnchor),
+            username.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            username.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
             //profileDescription
-            profileDescription.topAnchor.constraint(equalTo: nickname.bottomAnchor, constant: 8),
-            profileDescription.leadingAnchor.constraint(equalTo: nickname.leadingAnchor),
+            profileDescription.topAnchor.constraint(equalTo: username.bottomAnchor, constant: 8),
+            profileDescription.leadingAnchor.constraint(equalTo: username.leadingAnchor),
             
             //logoutButton
             logoutButton.widthAnchor.constraint(equalToConstant: 44),
@@ -107,7 +146,6 @@ class ProfileViewController: UIViewController {
     @objc
     private func didTapLogoutButton() {
         print("ProfileViewController: - Did tap Logout Button!")
-        UserDefaults.standard.removeObject(forKey: OAuth2TokenStorage.shared.tokenKey)
-        appDelegate.resetApp()
+        print(ProfileImageService.shared.profileImageURL!)
     }
 }
