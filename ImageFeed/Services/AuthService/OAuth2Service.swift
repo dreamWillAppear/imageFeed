@@ -12,7 +12,7 @@ final class OAuth2Service {
     
     // MARK: - Private Properties
     
-    private let urlSession = URLSession(configuration: .default)
+    private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private var lastCode: String?
     
@@ -38,6 +38,8 @@ final class OAuth2Service {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        
         let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
             DispatchQueue.main.async {
                 if

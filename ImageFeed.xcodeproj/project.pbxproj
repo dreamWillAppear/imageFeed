@@ -25,6 +25,7 @@
 		16D922932BBB670B00147E16 /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D922922BBB670B00147E16 /* ProfileImageModel.swift */; };
 		16E946CB2BB02BC900E3531B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E946CA2BB02BC900E3531B /* SplashViewController.swift */; };
 		16E946CD2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E946CC2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift */; };
+		FD101E4A2BBF02B2004CB081 /* URL Session + Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD101E492BBF02B2004CB081 /* URL Session + Data.swift */; };
 		FD36AEBB2B70292300E145AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD36AEBA2B70292300E145AE /* AppDelegate.swift */; };
 		FD36AEBD2B70292300E145AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD36AEBC2B70292300E145AE /* SceneDelegate.swift */; };
 		FD36AEBF2B70292300E145AE /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD36AEBE2B70292300E145AE /* ImagesListViewController.swift */; };
@@ -53,6 +54,7 @@
 		16D922922BBB670B00147E16 /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		16E946CA2BB02BC900E3531B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		16E946CC2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegateProtocol.swift; sourceTree = "<group>"; };
+		FD101E492BBF02B2004CB081 /* URL Session + Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL Session + Data.swift"; sourceTree = "<group>"; };
 		FD36AEB72B70292300E145AE /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD36AEBA2B70292300E145AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD36AEBC2B70292300E145AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,16 @@
 			path = SplashViewController;
 			sourceTree = "<group>";
 		};
+		FD101E4B2BBF0305004CB081 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FD101E492BBF02B2004CB081 /* URL Session + Data.swift */,
+				16C553682B9C5AE600172353 /* AuthService */,
+				169050842BB821B700CA2E8A /* ProfileService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FD36AEAE2B70292300E145AE = {
 			isa = PBXGroup;
 			children = (
@@ -158,11 +170,10 @@
 				1690507F2BB8200F00CA2E8A /* UIBlockingProgressHUD */,
 				16C5536F2B9CA36600172353 /* Protocols+Models */,
 				16E946C92BB02BA000E3531B /* SplashViewController */,
-				169050842BB821B700CA2E8A /* ProfileService */,
 				FD52CAED2B892009006C41E1 /* ProfileView */,
-				16C553682B9C5AE600172353 /* AuthService */,
 				169A004B2B78BD7B00CCA16D /* ImagesListCell */,
 				FD52CAEC2B891FDA006C41E1 /*  SingleImageView */,
+				FD101E4B2BBF0305004CB081 /* Services */,
 				FD36AEC52B70292400E145AE /* LaunchScreen.storyboard */,
 				FD36AEC02B70292300E145AE /* Main.storyboard */,
 				FD36AEC32B70292400E145AE /* Assets.xcassets */,
@@ -279,6 +290,7 @@
 				FD36AEBB2B70292300E145AE /* AppDelegate.swift in Sources */,
 				169050892BB826F000CA2E8A /* ProfileService.swift in Sources */,
 				16E946CB2BB02BC900E3531B /* SplashViewController.swift in Sources */,
+				FD101E4A2BBF02B2004CB081 /* URL Session + Data.swift in Sources */,
 				16C5536A2B9C5B0200172353 /* AuthViewController.swift in Sources */,
 				16C553672B94F64E00172353 /* Constants.swift in Sources */,
 				16D22C442B8257A300099C75 /* SingleImageViewController.swift in Sources */,
