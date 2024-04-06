@@ -36,34 +36,18 @@ final class OAuth2Service {
             return
         }
         
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        
-        let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
-            DispatchQueue.main.async {
-                if
-                    let data = data,
-                    let statusCode =  (response as? HTTPURLResponse)?.statusCode {
-                    switch statusCode {
-                        case 200...299:
-                            print("fetchOAuthToken - Status Code = \(statusCode)")
-                            do {
-                                let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                                    completion(.success(response.accessToken))
-                            } catch {
-                                    print("fetchOAuthToken error: \(String(describing: error))")
-                                    completion(.failure(error))
-                            }
-                        default:
-                            guard let error = error else { return }
-                            print("fetchOAuthToken - Status Code = \(statusCode) \n fetchOAuthToken error: \(String(describing: error))")
-                                completion(.failure(error))
-                    }
-                }
-                self.task = nil
-                self.lastCode = nil
+        let task = URLSession.shared.objectTask(for: urlRequest) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                case .success(let responseBody):
+                    completion(.success(responseBody.accessToken))
+                case .failure(let error):
+                    completion(.failure(error))
             }
+            self.task = nil
+            self.lastCode = nil
         }
         self.task = task
         task.resume()
@@ -83,7 +67,7 @@ final class OAuth2Service {
             URLQueryItem(name: "grant_type", value: Constants.grandType)
         ]
         guard let url = urlString.url else {
-            print("Failed to create URL with baseURL and parameters.")
+            print("OAuth2Service makeOAuthTokenRequest(70) -  Failed to create URL with baseURL and parameters.")
             return nil
         }
         var request = URLRequest(url: url)

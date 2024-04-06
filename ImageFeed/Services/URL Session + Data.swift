@@ -6,6 +6,8 @@ enum NetworkError: Error {
     case urlSessionError
 }
 
+// MARK: - URLSession
+
 extension URLSession {
     func data(
         for request: URLRequest,
@@ -37,6 +39,8 @@ extension URLSession {
     }
 }
 
+// MARK: - URLSession  func objectTask<T: Decodable>
+
 extension URLSession {
     
     func objectTask<T: Decodable>(
@@ -50,15 +54,17 @@ extension URLSession {
                 case .success(let data):
                     do {
                         let decodedData = try decoder.decode(T.self, from: data)
+                        print("Decoding \(type(of: T.self)) success!")
                         completion(.success(decodedData))
                     } catch {
+                        print("Decoding \(type(of: T.self)) error: \(String(describing: error))")
                         completion(.failure(error))
                     }
                 case.failure(let error):
+                    print("Request data for \(type(of: T.self)) error: \(String(describing: error))")
                     completion(.failure(error))
             }
         }
-        
         return task
     }
 }

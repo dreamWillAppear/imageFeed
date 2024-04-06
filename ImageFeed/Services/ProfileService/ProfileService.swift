@@ -47,40 +47,18 @@ final class ProfileService {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        let task = urlSession.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                
-                guard
-                    let data = data,
-                    let statusCode = (response as? HTTPURLResponse)?.statusCode else
-                {
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        print("ProfileService fetchUserProfileInfo(60) - Unknown error")
-                        completion(.failure(ProfileServiceError.invalidRequest))
-                    }
-                    return
-                }
-                
-                print("ProfileService fetchUserProfileInfo  \(statusCode)")
-                
-                switch statusCode {
-                case 200...299:
-                    do {
-                        let result = try decoder.decode(ProfileResponseBodyModel.self, from: data)
-                        let profile = ProfileModel(from: result)
-                        self.profile = profile
-                        completion(.success(profile))
-                    } catch {
-                        print("fetchUserProfileInfo error: \(String(describing: error))")
-                        completion(.failure(error))
-                    }
-                default:
-                    completion(.failure(ProfileServiceError.invalidRequest))
-                }
-                self.taskIsActive = false
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<ProfileResponseBodyModel, Error>) in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                case.success(let responseBody):
+                    let profile = ProfileModel(from: responseBody)
+                    completion(.success(profile))
+                case.failure(let error):
+                    completion(.failure(error))
             }
+            self.taskIsActive = false
         }
         taskIsActive = true
         task.resume()
@@ -101,10 +79,7 @@ final class ProfileService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
-        print(request)
         
         return request
-        
     }
-    
 }

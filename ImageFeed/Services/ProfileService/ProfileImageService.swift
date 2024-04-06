@@ -12,12 +12,14 @@ final class ProfileImageService {
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProvoderDidChange")
     
     // MARK: - Private Properties
+    
     private let urlSession = URLSession(configuration: .default)
     private var urlString = Constants.unsplashProfileImageRequestBaseURLString
     private let accessToken = OAuth2TokenStorage.shared.token
     private var taskIsActive = false
     private var profileImage: ProfileImageModel?
     private(set) var profileImageURL: String?
+    
     // MARK: - Public Methods
     
     func fetchProfileImage(accesToken: String?, username: String, completion: @escaping (Result<String, Error>) -> Void) {
@@ -47,47 +49,20 @@ final class ProfileImageService {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        let task = urlSession.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async { [self] in
-                
-                guard
-                    let data = data,
-                    let statusCode = (response as? HTTPURLResponse)?.statusCode else
-                {
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        print("ProfileImageService fetchUserProfileImage(58) - Unknown error")
-                        completion(.failure(ProfileServiceError.invalidRequest))
-                    }
-                    return
-                }
-                
-                print("ProfileImageService fetchProfileImage  \(statusCode)")
-                
-                switch statusCode {
-                case 200...299:
-                    do {
-                        let result = try decoder.decode(ProfileImageModel.self, from: data)
-                        let profileImage = result
-                        self.profileImage = profileImage
-                        self.profileImageURL = profileImage.profileImage.small
-                        completion(.success(profileImage.profileImage.small))
-                        NotificationCenter.default
-                            .post(
-                                name: ProfileImageService.didChangeNotification,
-                                object: self,
-                                userInfo: ["URL": profileImageURL]
-                            )
-                    } catch {
-                        print("fetchProfileImage error: \(String(describing: error))")
-                        completion(.failure(error))
-                    }
-                default:
-                    completion(.failure(ProfileServiceError.invalidRequest))
-                }
-                self.taskIsActive = false
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<ProfileImageModel ,Error>) in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                case .success(let responseBody):
+                    let profileImage = responseBody
+                    self.profileImage = profileImage
+                    self.profileImageURL = profileImage.profileImage.small
+                    completion(.success(profileImage.profileImage.small))
+                case .failure(let error):
+                    completion(.failure(error))
             }
+            self.taskIsActive = false
         }
         taskIsActive = true
         task.resume()
@@ -112,10 +87,6 @@ final class ProfileImageService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        print(request)
-        
         return request
-        
     }
-    
 }
