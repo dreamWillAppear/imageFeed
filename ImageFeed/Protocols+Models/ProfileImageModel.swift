@@ -3,6 +3,6 @@ struct ProfileImageModel: Codable {
 }
  
  struct ProfileImageURL: Codable {
-     let small: String
+     let large: String
  }
 

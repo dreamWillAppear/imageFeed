@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     
@@ -38,6 +39,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func setProfileImage() {
+        
+        view.addSubview(profilePhoto)
+       
+        profilePhoto.image = UIImage(named: "ProfileImageStub")
+        
         guard
             let profileImageURL = ProfileImageService.shared.profileImageURL,
             let url = URL(string: profileImageURL)
@@ -45,12 +51,20 @@ class ProfileViewController: UIViewController {
             print("ProfileViewController setProfileImage(45) - profileImageURL is nil!")
             return
         }
-        //TODO use kingfisher
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        profilePhoto.kf.indicatorType = .activity
+        profilePhoto.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "userProfilePhotoStub"),
+            options: [.processor(processor)]
+        )
+
     }
     
     private func setUIProfileViewController() {
         updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
-        setProfilePhotoStyle()
+        setProfileImage()
         setProfileNameLabelStyle()
         setProfileUsernameStyle()
         setProfileDescriptionStyle()
@@ -58,10 +72,6 @@ class ProfileViewController: UIViewController {
         setConstraints()
     }
     
-    private func setProfilePhotoStyle() {
-        profilePhoto.image = UIImage(named: "User Mock Photo")
-        view.addSubview(profilePhoto)
-    }
     
     private func updateProfileDetails(profile: ProfileModel?) {
         
@@ -97,7 +107,7 @@ class ProfileViewController: UIViewController {
     
     private func setLogoutButton() {
         logoutButton = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward") ?? .stub,
+            with: UIImage(systemName: "ipad.and.arrow.forward") ?? .profileImageStub,
             target: self,
             action: #selector(self.didTapLogoutButton))
         

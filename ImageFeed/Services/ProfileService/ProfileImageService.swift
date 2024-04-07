@@ -57,8 +57,8 @@ final class ProfileImageService {
                 case .success(let responseBody):
                     let profileImage = responseBody
                     self.profileImage = profileImage
-                    self.profileImageURL = profileImage.profileImage.small
-                    completion(.success(profileImage.profileImage.small))
+                    self.profileImageURL = profileImage.profileImage.large
+                    completion(.success(profileImage.profileImage.large))
                 case .failure(let error):
                     completion(.failure(error))
             }

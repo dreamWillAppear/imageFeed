@@ -11,11 +11,12 @@ class SplashViewController: UIViewController {
     
     //MARK: - Public Methods
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         //отладочное
         //UserDefaults.standard.setValue("test", forKey: OAuth2TokenStorage.shared.tokenKey)
         //UserDefaults.standard.removeObject(forKey: OAuth2TokenStorage.shared.tokenKey)
+        configureCache()
         completedAuthorizationCheck(accessToken: storage.token)
     }
     
