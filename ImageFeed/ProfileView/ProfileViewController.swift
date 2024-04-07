@@ -67,7 +67,7 @@ class ProfileViewController: UIViewController {
         
         guard let profile else
         {
-            print("ProfileViewController updateProfileDetails (58) - Failed to get data from ProfileService!")
+            print("ProfileViewController updateProfileDetails (70) - Failed to get data from ProfileService!")
             return
         }
         

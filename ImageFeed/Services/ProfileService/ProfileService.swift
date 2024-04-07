@@ -52,11 +52,12 @@ final class ProfileService {
             guard let self = self else { return }
             
             switch result {
-                case.success(let responseBody):
-                    let profile = ProfileModel(from: responseBody)
-                    completion(.success(profile))
-                case.failure(let error):
-                    completion(.failure(error))
+            case.success(let responseBody):
+                let profile = ProfileModel(from: responseBody)
+                self.profile = profile
+                completion(.success(profile))
+            case.failure(let error):
+                completion(.failure(error))
             }
             self.taskIsActive = false
         }

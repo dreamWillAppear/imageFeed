@@ -44,6 +44,7 @@ final class OAuth2Service {
                 case .success(let responseBody):
                     completion(.success(responseBody.accessToken))
                 case .failure(let error):
+                
                     completion(.failure(error))
             }
             self.task = nil
