@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 
 enum ProfileServiceError: Error {
     case invalidRequest
@@ -14,7 +15,7 @@ final class ProfileService {
     
     private let urlSession = URLSession(configuration: .default)
     private var urlString = Constants.unsplashProfileRequestBaseURLString
-    private var accessToken = OAuth2TokenStorage.shared.token
+    private var accessToken = KeychainWrapper.standard.string(forKey: "Auth token")
     private var taskIsActive = false
     private(set) var profile: ProfileModel?
     

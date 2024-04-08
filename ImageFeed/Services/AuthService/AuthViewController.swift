@@ -1,5 +1,6 @@
 import UIKit
 import ProgressHUD
+import SwiftKeychainWrapper
 
 final class AuthViewController: UIViewController {
     
@@ -11,7 +12,6 @@ final class AuthViewController: UIViewController {
     
     private let webViewController = WebViewViewController()
     private let oAuth2Service = OAuth2Service.shared
-    private let oAuth2TokenStorage = OAuth2TokenStorage.shared
     
     //MARK: - Public Methods
     
@@ -60,13 +60,17 @@ extension AuthViewController: WebViewViewControllerDelegateProtocol {
             
             UIBlockingProgressHUD.dismiss()
             switch result {
-            case .success(let token):
-                
-                self.oAuth2TokenStorage.token = token
-                self.delegate?.didAuthenticate(self)
-            case .failure(let error):
-                print("AuthViewController webViewViewController (33) - Token request failed: \(String(describing: error))")
-                present(showAuthErrorAlert(), animated: true)
+                case .success(let token):
+                    KeychainWrapper.standard.set(token, forKey: "Auth token")
+                    let isSuccess = KeychainWrapper.standard.set(token, forKey: "Auth token")
+                    guard isSuccess else {
+                        print("AuthViewController webViewViewController (33) -  Failed to write access token to Keychain!")
+                        return
+                    }
+                    self.delegate?.didAuthenticate(self)
+                case .failure(let error):
+                    print("AuthViewController webViewViewController (33) - Token request failed: \(String(describing: error))")
+                    present(showAuthErrorAlert(), animated: true)
             }
         }
         

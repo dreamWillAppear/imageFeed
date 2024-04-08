@@ -1,5 +1,6 @@
 import UIKit
 import Kingfisher
+import  SwiftKeychainWrapper
 
 class ProfileViewController: UIViewController {
     
@@ -41,7 +42,7 @@ class ProfileViewController: UIViewController {
     private func setProfileImage() {
         
         view.addSubview(profilePhoto)
-       
+        
         profilePhoto.image = UIImage(named: "ProfileImageStub")
         
         guard
@@ -53,13 +54,12 @@ class ProfileViewController: UIViewController {
         }
         
         let processor = RoundCornerImageProcessor(cornerRadius: 61)
-        profilePhoto.kf.indicatorType = .activity
         profilePhoto.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "userProfilePhotoStub"),
+            placeholder: UIImage(named: "ProfileImageStub"),
             options: [.processor(processor)]
         )
-
+        
     }
     
     private func setUIProfileViewController() {
@@ -156,6 +156,6 @@ class ProfileViewController: UIViewController {
     @objc
     private func didTapLogoutButton() {
         print("ProfileViewController: - Did tap Logout Button!")
-        print(ProfileImageService.shared.profileImageURL!)
+        KeychainWrapper.standard.removeObject(forKey: "Auth token")
     }
 }
