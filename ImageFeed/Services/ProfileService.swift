@@ -22,11 +22,10 @@ final class ProfileService {
     //MARK: - Public Methods
     
     func fetchUserProfileInfo(accesToken: String?, completion: @escaping (Result<ProfileModel, Error>) -> Void) {
-        
         assert(Thread.isMainThread)
         
         if taskIsActive {
-            print("ProfileService fetchUserProfileInfo(37) - User Profile Info Request is already in progress!")
+            print("ProfileService fetchUserProfileInfo(29) - User Profile Info Request is already in progress!")
             completion(.failure(ProfileServiceError.invalidRequest))
             return
         }
@@ -34,7 +33,7 @@ final class ProfileService {
         guard let accesToken = accesToken else
         {
             completion(.failure(ProfileServiceError.invalidRequest))
-            print("ProfileService fetchUserProfileInfo(31) - Acces Token is nil")
+            print("ProfileService fetchUserProfileInfo(37) - Acces Token is nil")
             return
         }
         
@@ -53,12 +52,12 @@ final class ProfileService {
             guard let self = self else { return }
             
             switch result {
-            case.success(let responseBody):
-                let profile = ProfileModel(from: responseBody)
-                self.profile = profile
-                completion(.success(profile))
-            case.failure(let error):
-                completion(.failure(error))
+                case.success(let responseBody):
+                    let profile = ProfileModel(from: responseBody)
+                    self.profile = profile
+                    completion(.success(profile))
+                case.failure(let error):
+                    completion(.failure(error))
             }
             self.taskIsActive = false
         }
@@ -72,7 +71,6 @@ final class ProfileService {
     private init() {}
     
     private func requestProfileInfo(token: String) -> URLRequest? {
-        
         guard let url = URL(string: urlString) else
         {
             print("ProfileService requestProfileInfoRequest(32) - Failed to create URL")

@@ -59,10 +59,10 @@ class ProfileViewController: UIViewController {
             placeholder: UIImage(named: "ProfileImageStub"),
             options: [.processor(processor)]
         )
-        
     }
     
     private func setUIProfileViewController() {
+        super.view.backgroundColor = .ypBlack
         updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
         setProfileImage()
         setProfileNameLabelStyle()

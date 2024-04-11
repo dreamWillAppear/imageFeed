@@ -31,7 +31,7 @@ class WebViewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-     estimatedProgressObservation =  webView.observe(
+        estimatedProgressObservation =  webView.observe(
             \.estimatedProgress,
              options: [],
              changeHandler: { [weak self] _, _ in
@@ -115,11 +115,8 @@ extension WebViewViewController: WKNavigationDelegate {
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: {$0.name == "code"})
         {
-            print(url.absoluteString)
-            print("codeItem is \(String(describing: codeItem.value))")
             return codeItem.value
         } else {
-            print("code is nil")
             return nil
         }
     }

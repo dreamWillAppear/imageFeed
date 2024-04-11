@@ -15,20 +15,26 @@ final class OAuth2Service {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private var lastCode: String?
+    private var isAlreadyRunning = false //если флаг true, то запрос на OAuthToken уже выполняется и повторный запрос будет отменен. Не понимаю зачем тут сравнивать еще и lastCode, но в курсе так описано.
     
     // MARK: - Public Methods
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        assert(Thread.isMainThread)
         
-        guard lastCode != code  else {
+        assert(Thread.isMainThread)
+        guard
+            lastCode != code,
+            isAlreadyRunning != true
+        else {
             DispatchQueue.main.async {
                 completion(.failure(AuthServiceError.invalidRequest))
             }
+            print("fetchOAuthToken is already running!")
             return
         }
         
         lastCode = code
+        isAlreadyRunning = true
         
         guard let urlRequest = makeOAuthTokenRequest(code: code)
         else {
@@ -44,10 +50,11 @@ final class OAuth2Service {
                 case .success(let responseBody):
                     completion(.success(responseBody.accessToken))
                 case .failure(let error):
-                
+                    print("OAuth2Service - URLSession.shared.objectTask Error (54): \(String(describing: error)) ")
                     completion(.failure(error))
             }
             self.task = nil
+            isAlreadyRunning = false
             self.lastCode = nil
         }
         self.task = task

@@ -15,7 +15,6 @@ final class ProfileImageService {
     
     private let urlSession = URLSession(configuration: .default)
     private var urlString = Constants.unsplashProfileImageRequestBaseURLString
-    private let accessToken = OAuth2TokenStorage.shared.token
     private var taskIsActive = false
     private var profileImage: ProfileImageModel?
     private(set) var profileImageURL: String?

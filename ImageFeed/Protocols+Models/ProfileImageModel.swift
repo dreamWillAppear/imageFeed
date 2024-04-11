@@ -1,8 +1,8 @@
 struct ProfileImageModel: Codable {
     let profileImage: ProfileImageURL
 }
- 
- struct ProfileImageURL: Codable {
-     let large: String
- }
+
+struct ProfileImageURL: Codable {
+    let large: String
+}
 
