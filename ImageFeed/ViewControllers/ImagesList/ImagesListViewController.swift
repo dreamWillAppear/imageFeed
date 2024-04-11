@@ -71,6 +71,11 @@ extension ImagesListViewController: UITableViewDelegate {
         guard let image = UIImage(named: photosName[indexPath.row]) else { return 0 }
         return image.size.height * (tableView.bounds.width / image.size.width)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // ...
+    }
+    
 }
 
 //MARK: - configCell
