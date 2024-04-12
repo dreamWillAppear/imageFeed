@@ -1,6 +1,6 @@
 import UIKit
 import Kingfisher
-import  SwiftKeychainWrapper
+import SwiftKeychainWrapper
 
 class ProfileViewController: UIViewController {
     
@@ -152,10 +152,11 @@ class ProfileViewController: UIViewController {
     }
     
     //MARK: - @objc
-    
+    let imagesService = ImagesListService()
     @objc
     private func didTapLogoutButton() {
         print("ProfileViewController: - Did tap Logout Button!")
-        KeychainWrapper.standard.removeObject(forKey: "Auth token")
+        imagesService.fetchPhotosNextPage()
+        
     }
 }

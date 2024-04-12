@@ -44,9 +44,6 @@ final class ProfileService {
             return
         }
         
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<ProfileResponseBodyModel, Error>) in
             
             guard let self = self else { return }
@@ -73,7 +70,7 @@ final class ProfileService {
     private func requestProfileInfo(token: String) -> URLRequest? {
         guard let url = URL(string: urlString) else
         {
-            print("ProfileService requestProfileInfoRequest(32) - Failed to create URL")
+            print("ProfileService requestProfileInfoRequest(76) - Failed to create URL")
             return nil
         }
         var request = URLRequest(url: url)

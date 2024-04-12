@@ -1,7 +1,8 @@
 import Kingfisher
 
 //MARK: - Cache
-let cache = ImageCache.default
+
+private let cache = ImageCache.default
 
 func configureCache() {
     cache.memoryStorage.config.totalCostLimit = 50 * 1024 * 1024
