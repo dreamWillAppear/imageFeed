@@ -39,6 +39,17 @@ class ProfileViewController: UIViewController {
             )
     }
     
+    private func setUIProfileViewController() {
+        super.view.backgroundColor = .ypBlack
+        updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
+        setProfileImage()
+        setProfileNameLabelStyle()
+        setProfileUsernameStyle()
+        setProfileDescriptionStyle()
+        setLogoutButton()
+        setConstraints()
+    }
+    
     private func setProfileImage() {
         
         view.addSubview(profilePhoto)
@@ -60,18 +71,6 @@ class ProfileViewController: UIViewController {
             options: [.processor(processor)]
         )
     }
-    
-    private func setUIProfileViewController() {
-        super.view.backgroundColor = .ypBlack
-        updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
-        setProfileImage()
-        setProfileNameLabelStyle()
-        setProfileUsernameStyle()
-        setProfileDescriptionStyle()
-        setLogoutButton()
-        setConstraints()
-    }
-    
     
     private func updateProfileDetails(profile: ProfileModel?) {
         

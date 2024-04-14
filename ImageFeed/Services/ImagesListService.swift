@@ -3,46 +3,6 @@ import SwiftKeychainWrapper
 
 final class ImagesListService {
     
-    //MARK: - Types
-    
-    struct Photo {
-        let id: String
-        let size: CGSize
-        let createdAt: String?
-        let welcomeDescription: String?
-        let thumbImageURL: String
-        let fullImageURL: String
-        let isLiked: Bool
-        
-        init(from result: PhotoResult) {
-            self.id = result.id
-            self.size = CGSize(width: result.width, height: result.height)
-            self.createdAt = result.createdAt
-            self.welcomeDescription = result.description
-            self.thumbImageURL = result.urls.thumb
-            self.fullImageURL = result.urls.full
-            self.isLiked = result.likedByUser
-        }
-    }
-    
-    struct PhotoResult: Codable {
-        let id: String
-        let createdAt: String
-        let width: Double
-        let height: Double
-        let likedByUser: Bool
-        let description: String?
-        let urls: UrlsResult
-    }
-    
-    struct UrlsResult: Codable {
-        let raw: String
-        let full: String
-        let regular: String
-        let small: String
-        let thumb: String
-    }
-    
     // MARK: - Public Properties
     
     // MARK: - Private Properties
@@ -86,6 +46,8 @@ final class ImagesListService {
             case .success(let photosResult):
                 lastLoadedPage = nextPage
                 photos += makePhotosArray(from: photosResult)
+                NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
+                                                                   object: self)
             case.failure(let error):
                 print( "ImagesListServicen fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
             }
@@ -97,6 +59,8 @@ final class ImagesListService {
     
     
     // MARK: - Private Methods
+    
+ 
     
     private func makePhotosArray(from photoResultArray: [PhotoResult]) -> [Photo] {
         var photosArray: [Photo] = []
@@ -131,8 +95,9 @@ final class ImagesListService {
         
         return request
     }
-    
+            
 }
+
 
 
 
