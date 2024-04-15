@@ -155,7 +155,7 @@ class ProfileViewController: UIViewController {
     @objc
     private func didTapLogoutButton() {
         print("ProfileViewController: - Did tap Logout Button!")
-        imagesService.fetchPhotosNextPage()
+        
         
     }
 }

@@ -3,28 +3,12 @@ import Kingfisher
 
 final class SingleImageViewController: UIViewController {
     
-    // MARK: - Public Properties
-    
-    var image: UIImage? {
-        didSet {
-            guard isViewLoaded else { return }
-            imageView.image = image
-            rescaleAndCenterImageInScrollView(image: image ?? .stub)
-        }
-    }
-    
-    var imageUrl: URL! {
-           didSet {
-               guard isViewLoaded else {return}
-               setSingleImage()
-           }
-       }
-    
-    
+    //MARK: - Public Properties
+    var urlForSinglImageView: URL?
+    var image = UIImage(named: "Image Cell Placeholder")
     // MARK: - IBOutlet
     
     @IBOutlet private var imageView: UIImageView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Private Properties
@@ -35,12 +19,16 @@ final class SingleImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.image = image
-        rescaleAndCenterImageInScrollView(image: image ?? .stub)
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
+        imageView.image = image //инициализируем imageView, что бы не получить краш при переходе из ImagesListViewController
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        setSingleImage()
+        setImage(from: urlForSinglImageView, to: imageView)
+    
     }
     
     // MARK: - IBAction
@@ -55,6 +43,20 @@ final class SingleImageViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+
+    //если viewWillAppear следует после viewDidLoad, то imageView уже инициализированна, загружаем в нее фото из url, переданного из ImagesListViewController - это выглядит проще и короче, чем предложенное решение из Спринт 9/20: 9 → Тема 2/6: Навигация → Урок 6/7 ViewDidLoad-хаки и честное решение:
+    private func setImage(from url: URL?, to imageView: UIImageView) {
+        imageView.kf.setImage(with: url, placeholder: UIImage(named: "Image Cell Placeholder")) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                UIBlockingProgressHUD.dismiss()
+            case .failure(_):
+                UIBlockingProgressHUD.dismiss()
+                dismiss(animated: true, completion: nil)
+            }
+        }
+    }
     
     //В настоящем этот метод не работает! Наставники подтвердили и сказали, что на текуших ревью этот момент не рассматривается. В уроке отмечено, что далее теория будет местами отталкиваться от этой реализации, поэтому пока не трогаю.
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
@@ -74,37 +76,6 @@ final class SingleImageViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
     
-    private func  setImageFromUrl() {
-          imageView.kf.setImage(with: imageUrl) { [weak self] result in
-              UIBlockingProgressHUD.dismiss()
-              guard let self = self else { return }
-              switch result {
-              case .success(let imageResult):
-                  self.rescaleAndCenterImageInScrollView(image: imageResult.image)
-              case .failure:
-                  self.showImageError(imageUrl: imageUrl)
-              }
-          }
-      }
-    
-    private func showImageError(imageUrl: URL) {
-           let alert = UIAlertController(
-                       title: "Что-то пошло не так",
-                       message: "Не удалось поставить лайк",
-                       preferredStyle: .alert)
-                   alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-           alert.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { [weak self] _ in
-               guard let self = self else { return }
-               self.setImageFromUrl()
-           }))
-                   self.present(alert, animated: true, completion: nil)
-       }
-
-    
-  private  func setSingleImage() {
-         UIBlockingProgressHUD.show()
-         setImageFromUrl()
-     }
     
 }
 

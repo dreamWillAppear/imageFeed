@@ -7,6 +7,8 @@ class ImagesListViewController: UIViewController {
     
     @IBOutlet private var tableView: UITableView!
     
+
+    
     // MARK: - Private Properties
     private let imagesListService = ImagesListService()
     private var imagesListNotificationObserver: NSObjectProtocol?
@@ -38,15 +40,15 @@ class ImagesListViewController: UIViewController {
                 assertionFailure("Invalid segue destanation")
                 return
             }
-            let photoUrl = photos[indexPath.row].fullImageURL
-            viewController.imageUrl = photoUrl
             
+            viewController.urlForSinglImageView = photos[indexPath.row].fullImageURL //передаем в SingleImageViewController url на fullSize фото
+            UIBlockingProgressHUD.show()
         } else {
             super.prepare(for: segue, sender: sender)
         }
     }
     
-private    func updateTableViewAnimated() {
+private func updateTableViewAnimated() {
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
@@ -101,15 +103,9 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let imageInsert = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-               let imageViewWidth = tableView.bounds.width - imageInsert.left - imageInsert.right
-               let imageWidth = photos[indexPath.row].size.width
-               let scale = imageViewWidth / imageWidth
-               let cellHeight = photos[indexPath.row].size.height * scale + imageInsert.top + imageInsert.bottom
-               return cellHeight
-
-//        guard let image = UIImage(named: photos[indexPath.row]) else { return 0 }
-//        return image.size.height * (tableView.bounds.width / image.size.width)
+        let photoWidth =  photos[indexPath.row].size.width
+        let photoHeight = photos[indexPath.row].size.height
+ return photoHeight * (tableView.bounds.width / photoWidth)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -127,18 +123,15 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
         
         cell.delegate = self
         
-        let photoUrl = photos[indexPath.row].thumbImageURL
+        let photoUrl = photos[indexPath.row].thumbImageURL //по факту загружается размер "regular", если грзуить "thumb" как в курсе - получим ленту шакалов
         cell.imageCell.kf.indicatorType = .activity
         cell.imageCell.kf.setImage(with: photoUrl, placeholder: UIImage(named: "Image Cell Placeholder")) { [weak self] _ in
             guard let self = self else { return }
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             cell.imageCell.kf.indicatorType = .none
         }
-        
     }
-    
     
 }
 
-//MARK: - updateTableViewAnimated
 

@@ -11,7 +11,7 @@ final class ImagesListCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageCell.kf.cancelDownloadTask()
+        print(" imageCell.kf.cancelDownloadTask()")
     }
     
 }
