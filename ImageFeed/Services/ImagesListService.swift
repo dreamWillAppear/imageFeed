@@ -12,25 +12,26 @@ final class ImagesListService {
     private(set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     private var taskIsActive = false
+    private var likeTaskIsActive = false
     
     // MARK: - Public Methods
     
     func  fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         guard taskIsActive == false else {
-            print("ImagesListServicen fetchPhotosNextPage - task is already active!")
+            print("ImagesListService fetchPhotosNextPage - task is already active!")
             return
         }
         
         guard let token = accessToken else {
-            print("ImagesListServicen fetchPhotosNextPage - missing token!")
+            print("ImagesListService fetchPhotosNextPage - missing token!")
             return
         }
         
         let nextPage = (lastLoadedPage ?? 0 ) + 1
         
         guard let request = makePhotosRequest(token: token, page: nextPage) else {
-            print("ImagesListServicen fetchPhotosNextPage - failed to create request!")
+            print("ImagesListService fetchPhotosNextPage - failed to create request!")
             return
         }
         
@@ -38,18 +39,18 @@ final class ImagesListService {
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             
             guard let self = self else {
-                print("ImagesListServicen fetchPhotosNextPage - self is nil!")
+                print("ImagesListService fetchPhotosNextPage - self is nil!")
                 return
             }
             
             switch result {
-            case .success(let photosResult):
-                lastLoadedPage = nextPage
-                photos += makePhotosArray(from: photosResult)
-                NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
-                                                                   object: self)
-            case.failure(let error):
-                print( "ImagesListServicen fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
+                case .success(let photosResult):
+                    lastLoadedPage = nextPage
+                    photos += makePhotosArray(from: photosResult)
+                    NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
+                                                    object: self)
+                case.failure(let error):
+                    print( "ImagesListServicen fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
             }
             self.taskIsActive = false
         }
@@ -57,10 +58,48 @@ final class ImagesListService {
         task.resume()
     }
     
+    func changeLike(photoId: String, isLike: Bool, completion: @escaping (Result<IsLiked, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        guard taskIsActive == false else {
+            print("Like Task Is Already Active!")
+            return
+        }
+        
+        taskIsActive = true
+        let urlString = Constants.defaultBaseURLString + "photos/\(photoId)/like"
+        
+        let url = URL(string: urlString)
+        guard
+            let url = url,
+            let token = accessToken else {
+            print("changeLike - failed to create url or token is bad!")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = isLike ? "POST" :  "DELETE"
+        request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        print(request)
+        
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<IsLiked, Error>) in
+            guard let self = self else { return }
+            switch result {
+                case.success(let result):
+                    completion(.success(result))
+                case.failure(let error):
+                    completion(.failure(error))
+                    print("changeLike error - \(String(describing: error))")
+            }
+        }
+        taskIsActive = false
+        task.resume()
+    }
     
+    
+    // func fetchUserProfileInfo(accesToken: String?, completion: @escaping (Result<ProfileModel, Error>) -> Void)
     // MARK: - Private Methods
     
- 
+    
     
     private func makePhotosArray(from photoResultArray: [PhotoResult]) -> [Photo] {
         var photosArray: [Photo] = []
@@ -80,7 +119,7 @@ final class ImagesListService {
         //TODO: Перед сдачей на ревью, на всякий случай пояснить внутри ПР почему опущен параметр "per_page" - потому что дефолтно и так 10 Number of items per page. (Optional; default: 10)
         urlString.queryItems = [
             URLQueryItem(name: "page", value: String("\(page)"))
-
+            
         ]
         
         guard let url = urlString.url else {
@@ -95,10 +134,8 @@ final class ImagesListService {
         
         return request
     }
-            
+    
 }
-
-
 
 
 // MARK: - Public Properties

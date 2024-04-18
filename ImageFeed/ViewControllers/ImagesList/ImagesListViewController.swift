@@ -2,12 +2,10 @@ import UIKit
 import Kingfisher
 
 class ImagesListViewController: UIViewController {
-    
+
     // MARK: - IBOutlet
     
     @IBOutlet private var tableView: UITableView!
-    
-
     
     // MARK: - Private Properties
     private let imagesListService = ImagesListService()
@@ -15,19 +13,12 @@ class ImagesListViewController: UIViewController {
     private var photos: [Photo] = []
     private let photosName: [String] = Array(0...19).map{"\($0)"}
     private let showSingleImage = "ShowSingleImage"
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
     
     // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 200
-        
         observeImagesListChanges()
     }
     
@@ -73,6 +64,21 @@ private func updateTableViewAnimated() {
     
 }
 
+private func configDateString(from date: String) -> String {
+    var  formatedDateString = ""
+    lazy var inputDateFormatter = ISO8601DateFormatter()
+    
+    guard let date = inputDateFormatter.date(from: date) else {
+        print("PhotoResultModel - failed to get date!")
+        return formatedDateString
+    }
+    
+    lazy var dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .long
+    dateFormatter.timeStyle = .none
+    formatedDateString = dateFormatter.string(from: date)
+    return formatedDateString
+}
 
 
 //MARK: - UITableViewDataSource
@@ -105,7 +111,7 @@ extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let photoWidth =  photos[indexPath.row].size.width
         let photoHeight = photos[indexPath.row].size.height
- return photoHeight * (tableView.bounds.width / photoWidth)
+        return photoHeight * (tableView.bounds.width / photoWidth)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -122,13 +128,34 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         cell.delegate = self
-        
-        let photoUrl = photos[indexPath.row].thumbImageURL //по факту загружается размер "regular", если грзуить "thumb" как в курсе - получим ленту шакалов
+        let photo = photos[indexPath.row]
+        let photoUrl = photo.thumbImageURL //по факту загружается размер "regular", если грзуить "thumb" как в курсе - получим ленту шакалов
+        let dateLabel = configDateString(from: photo.createdAt)
+        cell.likeButton.imageView?.image = photo.likedByUser ? .likeButtonActive : .likeButtonInactive
+        cell.isAlreadyLiked = photo.likedByUser
+        cell.photoId = photo.id
+        cell.dateLabel.text = dateLabel
         cell.imageCell.kf.indicatorType = .activity
         cell.imageCell.kf.setImage(with: photoUrl, placeholder: UIImage(named: "Image Cell Placeholder")) { [weak self] _ in
             guard let self = self else { return }
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             cell.imageCell.kf.indicatorType = .none
+        }
+    }
+
+    func didTapLikeButton(from cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        imagesListService.changeLike(photoId: photo.id, isLike: cell.isAlreadyLiked ? false : true) { [weak self] result in
+            guard let _ = self else  { return }
+            switch result {
+                case.success(let result):
+                    //В курсе предлагают просто инвентировать кнопку лайка, но раз запрос после выполнения возвращает состояние фото - логично задействовать это состояние, что бы отобразить действительное наличие лайка. Это сработало, поэтому оставляю так.
+                    cell.likeButton.imageView?.image = result.photo.likedByUser ? .likeButtonActive : .likeButtonInactive
+                    cell.isAlreadyLiked = result.photo.likedByUser 
+                case.failure(let error):
+                    print(String(describing: error))
+            }
         }
     }
     

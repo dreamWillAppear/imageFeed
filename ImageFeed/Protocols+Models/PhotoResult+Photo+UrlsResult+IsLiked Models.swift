@@ -2,14 +2,17 @@ import Foundation
 
 //MARK: - Types
 
-struct Photo {
+struct Photo: Codable {
+    
+    
+    
     let id: String
     let size: CGSize
-    let createdAt: String?
+    let createdAt: String
     let welcomeDescription: String?
     let thumbImageURL: URL
     let fullImageURL: URL
-    let isLiked: Bool
+    let likedByUser: Bool
     
     init(from result: PhotoResult) {
         self.id = result.id
@@ -18,7 +21,7 @@ struct Photo {
         self.welcomeDescription = result.description
         self.thumbImageURL = URL(string: result.urls.regular)!
         self.fullImageURL = URL(string: result.urls.full)!
-        self.isLiked = result.likedByUser
+        self.likedByUser = result.likedByUser
     }
 }
 
@@ -38,4 +41,8 @@ struct UrlsResult: Codable {
     let regular: String
     let small: String
     let thumb: String
+}
+
+struct IsLiked: Codable {
+    let photo: PhotoResult
 }
