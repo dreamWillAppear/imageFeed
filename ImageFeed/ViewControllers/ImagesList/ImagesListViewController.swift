@@ -32,7 +32,7 @@ class ImagesListViewController: UIViewController {
                 return
             }
             
-            viewController.urlForSinglImageView = photos[indexPath.row].fullImageURL //передаем в SingleImageViewController url на fullSize фото
+            viewController.urlForSingleImageView = photos[indexPath.row].fullImageURL //передаем в SingleImageViewController url на fullSize фото
             UIBlockingProgressHUD.show()
         } else {
             super.prepare(for: segue, sender: sender)
@@ -95,6 +95,7 @@ extension ImagesListViewController: UITableViewDataSource {
             print("ImagesListViewController - EMPTY CELL SHOWN!")
             return UITableViewCell()
         }
+        imageListCell.delegate = self
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
@@ -127,7 +128,6 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
-        cell.delegate = self
         let photo = photos[indexPath.row]
         let photoUrl = photo.thumbImageURL //по факту загружается размер "regular", если грзуить "thumb" как в курсе - получим ленту шакалов
         let dateLabel = configDateString(from: photo.createdAt)
@@ -153,7 +153,9 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
                     //В курсе предлагают просто инвентировать кнопку лайка, но раз запрос после выполнения возвращает состояние фото - логично задействовать это состояние, что бы отобразить действительное наличие лайка. Это сработало, поэтому оставляю так.
                     cell.likeButton.imageView?.image = result.photo.likedByUser ? .likeButtonActive : .likeButtonInactive
                     cell.isAlreadyLiked = result.photo.likedByUser 
+                    UIBlockingProgressHUD.dismiss()
                 case.failure(let error):
+                    UIBlockingProgressHUD.dismiss()
                     print(String(describing: error))
             }
         }

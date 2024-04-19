@@ -60,6 +60,7 @@ final class ImagesListService {
     
     func changeLike(photoId: String, isLike: Bool, completion: @escaping (Result<IsLiked, Error>) -> Void) {
         assert(Thread.isMainThread)
+        UIBlockingProgressHUD.show()
         guard taskIsActive == false else {
             print("Like Task Is Already Active!")
             return

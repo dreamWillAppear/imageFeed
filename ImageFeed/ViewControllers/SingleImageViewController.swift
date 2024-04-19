@@ -4,7 +4,7 @@ import Kingfisher
 final class SingleImageViewController: UIViewController {
     
     //MARK: - Public Properties
-    var urlForSinglImageView: URL?
+    var urlForSingleImageView: URL?
     var image = UIImage()
     // MARK: - IBOutlet
     
@@ -27,7 +27,7 @@ final class SingleImageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setImage(from: urlForSinglImageView, to: imageView)
+        setImage(from: urlForSingleImageView, to: imageView)
     }
     
     // MARK: - IBAction
@@ -53,10 +53,34 @@ final class SingleImageViewController: UIViewController {
                 UIBlockingProgressHUD.dismiss()
             case .failure(_):
                 UIBlockingProgressHUD.dismiss()
-                dismiss(animated: true, completion: nil)
+                showError()
             }
         }
     }
+    
+    private func showError() {
+        let alert = UIAlertController(title: "Что-то пошло не так.",
+                                      message: "Попробовать ещё раз?",
+                                      preferredStyle: .alert)
+        
+        let tryAgainButton = UIAlertAction(title: "Повторить", style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.setImage(from: self.urlForSingleImageView, to: self.imageView)
+        }
+        
+        let dismissAlertButton = UIAlertAction(title: "Не надо", style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+            alert.dismiss(animated: true)
+        }
+        
+        alert.addAction(tryAgainButton)
+        alert.addAction(dismissAlertButton)
+        
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
             let visibleRectSize = scrollView.bounds.size

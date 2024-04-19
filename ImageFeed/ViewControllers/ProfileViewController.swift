@@ -1,6 +1,8 @@
 import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
+import WebKit
+
 
 class ProfileViewController: UIViewController {
     
@@ -150,12 +152,51 @@ class ProfileViewController: UIViewController {
         ])
     }
     
+    private func logout() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(
+            ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()
+        ) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(
+                    ofTypes: record.dataTypes,
+                    for: [record],
+                    completionHandler: {}
+                )
+            }
+        }
+        profilePhoto.image = .profileImageStub
+        nameLabel.text = ""
+        username.text = ""
+        profileDescription.text = ""
+        KeychainWrapper.standard.remove(forKey: "Auth token")
+        guard let window = UIApplication.shared.windows.first else {fatalError("окно не обноружено")}
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
+    }
+    
+    private func logoutAlert() {
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены что хотите выйти?",
+            preferredStyle: .alert)
+        
+        let approveLogoutButton =  UIAlertAction(title: "Да", style: . default) { [weak self] _ in
+            guard let self = self else {return}
+            self.logout()
+        }
+        let cancelButton = UIAlertAction(title: "Нет", style: .cancel)
+        
+        alert.addAction(approveLogoutButton)
+        alert.addAction(cancelButton)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     //MARK: - @objc
     let imagesService = ImagesListService()
     @objc
     private func didTapLogoutButton() {
-        print("ProfileViewController: - Did tap Logout Button!")
-        
-        
+        logoutAlert()
     }
 }

@@ -18,7 +18,6 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUISplashViewController()
-        //KeychainWrapper.standard.remove(forKey: "Auth token")
     }
     
     override func viewDidAppear(_ animated: Bool) {
