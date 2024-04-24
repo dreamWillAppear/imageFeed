@@ -1,5 +1,3 @@
-import UIKit
-
 struct OAuthTokenResponseBody: Codable {
     let accessToken: String
     let tokenType: String
@@ -7,7 +5,8 @@ struct OAuthTokenResponseBody: Codable {
     let createdAt: Int
 }
 
-/*https://unsplash.com/documentation/user-authentication-workflow
+/*
+ https://unsplash.com/documentation/user-authentication-workflow
  If successful, the response body will be a JSON representation of your user’s access token:
  
  {
@@ -15,4 +14,5 @@ struct OAuthTokenResponseBody: Codable {
  "token_type": "bearer",
  "scope": "public read_photos write_photos",
  "created_at": 1436544465
- }*/
+ }
+ */
