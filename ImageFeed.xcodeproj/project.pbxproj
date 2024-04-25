@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		163D39072BA4AAAF00DA89AC /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */; };
 		167A95432BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167A95422BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift */; };
-		168D8F7D2BCA94F20069908B /* ImagesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168D8F7C2BCA94F20069908B /* ImagesListServiceTests.swift */; };
 		169050812BB8202200CA2E8A /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169050802BB8202200CA2E8A /* UIBlockingProgressHUD.swift */; };
 		169050832BB821A400CA2E8A /* ProfileResponseBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169050822BB821A300CA2E8A /* ProfileResponseBodyModel.swift */; };
 		169050892BB826F000CA2E8A /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169050882BB826F000CA2E8A /* ProfileService.swift */; };
@@ -38,6 +37,7 @@
 		FD37D8772BC34E9200609059 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FD37D8762BC34E9200609059 /* Kingfisher */; };
 		FD37D87A2BC34EDD00609059 /* Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD37D8792BC34EDD00609059 /* Kingfisher.swift */; };
 		FD37D87D2BC4A3F500609059 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = FD37D87C2BC4A3F500609059 /* SwiftKeychainWrapper */; };
+		FD5AE80E2BD9BE3A00CE65B9 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */; };
 		FDD4205A2BB4C8B600EBC517 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FDD420592BB4C8B600EBC517 /* ProgressHUD */; };
 		FDED610C2BC73BFD00394A6D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDED610B2BC73BFD00394A6D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -56,7 +56,6 @@
 		163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		167A95422BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBodyModel.swift; sourceTree = "<group>"; };
 		168D8F7A2BCA94F20069908B /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		168D8F7C2BCA94F20069908B /* ImagesListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServiceTests.swift; sourceTree = "<group>"; };
 		169050802BB8202200CA2E8A /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		169050822BB821A300CA2E8A /* ProfileResponseBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseBodyModel.swift; sourceTree = "<group>"; };
 		169050882BB826F000CA2E8A /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		FD36AEC62B70292400E145AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD36AEC82B70292400E145AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD37D8792BC34EDD00609059 /* Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kingfisher.swift; sourceTree = "<group>"; };
+		FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		FDED610B2BC73BFD00394A6D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,14 +109,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		168D8F7B2BCA94F20069908B /* ImagesListServiceTests */ = {
-			isa = PBXGroup;
-			children = (
-				168D8F7C2BCA94F20069908B /* ImagesListServiceTests.swift */,
-			);
-			path = ImagesListServiceTests;
-			sourceTree = "<group>";
-		};
 		169A004B2B78BD7B00CCA16D /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				FD36AEB92B70292300E145AE /* ImageFeed */,
-				168D8F7B2BCA94F20069908B /* ImagesListServiceTests */,
 				FD36AEB82B70292300E145AE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -178,6 +169,7 @@
 				FD36AEBA2B70292300E145AE /* AppDelegate.swift */,
 				FD36AEBC2B70292300E145AE /* SceneDelegate.swift */,
 				16C553662B94F64E00172353 /* Constants.swift */,
+				FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */,
 				16C5536F2B9CA36600172353 /* Protocols+Models */,
 				FDED610D2BC74E5400394A6D /* ViewControllers */,
 				FD101E4B2BBF0305004CB081 /* Services */,
@@ -323,7 +315,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				168D8F7D2BCA94F20069908B /* ImagesListServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +335,7 @@
 				169050832BB821A400CA2E8A /* ProfileResponseBodyModel.swift in Sources */,
 				167A95432BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift in Sources */,
 				16C1995E2BCC7900005B20A8 /* ImagesListCellDelegateProtocol.swift in Sources */,
+				FD5AE80E2BD9BE3A00CE65B9 /* DateFormatters.swift in Sources */,
 				FD36AEBB2B70292300E145AE /* AppDelegate.swift in Sources */,
 				FD0720BD2BC8970A001E6581 /* ImagesListService.swift in Sources */,
 				16C1995C2BCB30E7005B20A8 /* PhotoResult+Photo+UrlsResult+IsLiked Models.swift in Sources */,

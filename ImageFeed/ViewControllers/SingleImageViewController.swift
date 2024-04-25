@@ -5,7 +5,8 @@ final class SingleImageViewController: UIViewController {
     
     //MARK: - Public Properties
     var urlForSingleImageView: URL?
-    var image = UIImage()
+    lazy var image = UIImage()
+    
     // MARK: - IBOutlet
     
     @IBOutlet private var imageView: UIImageView!
@@ -42,18 +43,18 @@ final class SingleImageViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-
+    
     //если viewWillAppear следует после viewDidLoad, то imageView уже инициализированна, загружаем в нее фото из url, переданного из ImagesListViewController - это выглядит проще и короче, чем предложенное решение из Спринт 9/20: 9 → Тема 2/6: Навигация → Урок 6/7 ViewDidLoad-хаки и честное решение:
     private func setImage(from url: URL?, to imageView: UIImageView) {
         imageView.kf.setImage(with: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success (let imageResult):
+                case .success (let imageResult):
                     self.rescaleAndCenterImageInScrollView(image: imageResult.image)
-                UIBlockingProgressHUD.dismiss()
-            case .failure(_):
-                UIBlockingProgressHUD.dismiss()
-                showError()
+                    UIBlockingProgressHUD.dismiss()
+                case .failure(_):
+                    UIBlockingProgressHUD.dismiss()
+                    showError()
             }
         }
     }
@@ -78,32 +79,32 @@ final class SingleImageViewController: UIViewController {
         alert.addAction(dismissAlertButton)
         
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
-            let visibleRectSize = scrollView.bounds.size
-            let imageSize = image.size
-            
-            // Вычисляем масштаб, чтобы изображение занимало всю доступную область scrollView
-            let hScale = visibleRectSize.width / imageSize.width
-            let vScale = visibleRectSize.height / imageSize.height
-            let scale = max(hScale, vScale)
-            
-            // Устанавливаем масштабирование изображения
-            imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
-            
-            // Вычисляем новый размер contentSize
-            let newContentSize = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
-            
-            // Устанавливаем contentSize
-            scrollView.contentSize = newContentSize
-            
-            // Центрируем изображение
-            let x = max(0, (newContentSize.width - visibleRectSize.width) / 2)
-            let y = max(0, (newContentSize.height - visibleRectSize.height) / 2)
-            scrollView.contentOffset = CGPoint(x: x, y: y)
+        let visibleRectSize = scrollView.bounds.size
+        let imageSize = image.size
+        
+        // Вычисляем масштаб, чтобы изображение занимало всю доступную область scrollView
+        let hScale = visibleRectSize.width / imageSize.width
+        let vScale = visibleRectSize.height / imageSize.height
+        let scale = max(hScale, vScale)
+        
+        // Устанавливаем масштабирование изображения
+        imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        
+        // Вычисляем новый размер contentSize
+        let newContentSize = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
+        
+        // Устанавливаем contentSize
+        scrollView.contentSize = newContentSize
+        
+        // Центрируем изображение
+        let x = max(0, (newContentSize.width - visibleRectSize.width) / 2)
+        let y = max(0, (newContentSize.height - visibleRectSize.height) / 2)
+        scrollView.contentOffset = CGPoint(x: x, y: y)
     }
     
     
@@ -117,14 +118,14 @@ extension SingleImageViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-           if scale > scrollView.minimumZoomScale && scale < scrollView.maximumZoomScale {
-               let imageSize = imageView.image?.size ?? .zero
-               let visibleRectSize = scrollView.bounds.size
-               let hScale = visibleRectSize.width / imageSize.width
-               let vScale = visibleRectSize.height / imageSize.height
-               let newScale = max(hScale, vScale)
-               scrollView.setZoomScale(newScale, animated: true)
-           }
-       }
+        if scale > scrollView.minimumZoomScale && scale < scrollView.maximumZoomScale {
+            let imageSize = imageView.image?.size ?? .zero
+            let visibleRectSize = scrollView.bounds.size
+            let hScale = visibleRectSize.width / imageSize.width
+            let vScale = visibleRectSize.height / imageSize.height
+            let newScale = max(hScale, vScale)
+            scrollView.setZoomScale(newScale, animated: true)
+        }
+    }
     
 }

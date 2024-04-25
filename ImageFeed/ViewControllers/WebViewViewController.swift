@@ -14,7 +14,7 @@ class WebViewViewController: UIViewController {
     
     //MARK: - Private Properties
     
-    private var progressView = UIProgressView()
+    private lazy var progressView = UIProgressView()
     private var estimatedProgressObservation: NSKeyValueObservation?
     
     //MARK: - Public Methods

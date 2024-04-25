@@ -1,3 +1,3 @@
 protocol ImagesListCellDelegateProtocol: AnyObject {
-    func didTapLikeButton(from cell: ImagesListCell) 
+    func didTapLikeButton(from cell: ImagesListCell)
 }

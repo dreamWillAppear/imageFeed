@@ -2,7 +2,7 @@ import UIKit
 import Kingfisher
 
 class ImagesListViewController: UIViewController {
-
+    
     // MARK: - IBOutlet
     
     @IBOutlet private var tableView: UITableView!
@@ -11,8 +11,8 @@ class ImagesListViewController: UIViewController {
     private let imagesListService = ImagesListService()
     private var imagesListNotificationObserver: NSObjectProtocol?
     private var photos: [Photo] = []
-    private let photosName: [String] = Array(0...19).map{"\($0)"}
     private let showSingleImage = "ShowSingleImage"
+    
     
     // MARK: - Public Methods
     
@@ -27,7 +27,7 @@ class ImagesListViewController: UIViewController {
             guard
                 let viewController = segue.destination as? SingleImageViewController,
                 let indexPath = sender as? IndexPath
-            else { 
+            else {
                 assertionFailure("Invalid segue destanation")
                 return
             }
@@ -39,7 +39,9 @@ class ImagesListViewController: UIViewController {
         }
     }
     
-private func updateTableViewAnimated() {
+    //MARK: - Private methods
+    
+    private func updateTableViewAnimated() {
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
@@ -52,32 +54,27 @@ private func updateTableViewAnimated() {
             } completion: { _ in }
         }
     }
-
-    //MARK: - Private methods
     
     private func observeImagesListChanges() {
-           imagesListNotificationObserver = NotificationCenter.default.addObserver(forName: ImagesListService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
-               self?.updateTableViewAnimated()
-           }
-           imagesListService.fetchPhotosNextPage()
-       }
-    
+        imagesListNotificationObserver = NotificationCenter.default.addObserver(forName: ImagesListService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.updateTableViewAnimated()
+        }
+        imagesListService.fetchPhotosNextPage()
+    }
 }
 
 private func configDateString(from date: String) -> String {
-    var  formatedDateString = ""
-    lazy var inputDateFormatter = ISO8601DateFormatter()
+    var  formattedDateString = ""
     
-    guard let date = inputDateFormatter.date(from: date) else {
+    guard let date = DateFormatters.inputFormatter.date(from: date) else {
         print("PhotoResultModel - failed to get date!")
-        return formatedDateString
+        return formattedDateString
     }
     
-    lazy var dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .long
-    dateFormatter.timeStyle = .none
-    formatedDateString = dateFormatter.string(from: date)
-    return formatedDateString
+    DateFormatters.dateFormatter.dateStyle = .long
+    DateFormatters.dateFormatter.timeStyle = .none
+    formattedDateString = DateFormatters.dateFormatter.string(from: date)
+    return formattedDateString
 }
 
 
@@ -117,9 +114,10 @@ extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == photos.count {
-                   imagesListService.fetchPhotosNextPage()
-               }
-           }
+            imagesListService.fetchPhotosNextPage()
+        }
+    }
+    
 }
 
 //MARK: - configCell
@@ -127,9 +125,8 @@ extension ImagesListViewController: UITableViewDelegate {
 extension ImagesListViewController: ImagesListCellDelegateProtocol {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        
-        let photo = photos[indexPath.row]
-        let photoUrl = photo.thumbImageURL //по факту загружается размер "regular", если грзуить "thumb" как в курсе - получим ленту шакалов
+        let photo = self.photos[indexPath.row]
+        let photoUrl = photo.thumbImageURL //по факту загружается размер "regular", если грузить "thumb" как указано в курсе - получим ленту шакалов
         let dateLabel = configDateString(from: photo.createdAt)
         cell.likeButton.imageView?.image = photo.likedByUser ? .likeButtonActive : .likeButtonInactive
         cell.isAlreadyLiked = photo.likedByUser
@@ -137,12 +134,12 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
         cell.dateLabel.text = dateLabel
         cell.imageCell.kf.indicatorType = .activity
         cell.imageCell.kf.setImage(with: photoUrl, placeholder: UIImage(named: "Image Cell Placeholder")) { [weak self] _ in
-            guard let self = self else { return }
+            guard let self = self, let indexPath = self.tableView.indexPath(for: cell) else { return }
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             cell.imageCell.kf.indicatorType = .none
         }
     }
-
+    
     func didTapLikeButton(from cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
@@ -152,7 +149,7 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
                 case.success(let result):
                     //В курсе предлагают просто инвентировать кнопку лайка, но раз запрос после выполнения возвращает состояние фото - логично задействовать это состояние, что бы отобразить действительное наличие лайка. Это сработало, поэтому оставляю так.
                     cell.likeButton.imageView?.image = result.photo.likedByUser ? .likeButtonActive : .likeButtonInactive
-                    cell.isAlreadyLiked = result.photo.likedByUser 
+                    cell.isAlreadyLiked = result.photo.likedByUser
                     UIBlockingProgressHUD.dismiss()
                 case.failure(let error):
                     UIBlockingProgressHUD.dismiss()

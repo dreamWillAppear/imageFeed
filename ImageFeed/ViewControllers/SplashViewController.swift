@@ -11,7 +11,7 @@ final class SplashViewController: UIViewController {
     private let showImageListScreenSegueIdentifier = "showImageListView"
     
     //UI
-    private let splashScreenLogo = UIImageView()
+    private lazy var splashScreenLogo = UIImageView()
     
     //MARK: - Public Methods
     
@@ -55,7 +55,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func switchToTabBarController() {
-                // Получаем экземпляр `window` приложения
+        // Получаем экземпляр `window` приложения
         guard let window = UIApplication.shared.windows.first else {
             assertionFailure("SplashViewController (33) - Invalid window configuration")
             return

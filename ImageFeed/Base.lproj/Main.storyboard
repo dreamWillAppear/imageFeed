@@ -247,21 +247,6 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vAZ-uS-EK3">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moe-if-lJ1" userLabel="Sharing Button">
-                                        <rect key="frame" x="182" y="795" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="DCA-xQ-L1n"/>
-                                            <constraint firstAttribute="height" constant="50" id="iob-HS-dwG"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="Sharing Button">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="shareButton:" destination="NHA-FS-hgR" eventType="touchUpInside" id="fhP-nX-6HI"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="vAZ-uS-EK3" firstAttribute="leading" secondItem="ZYP-7z-Hs1" secondAttribute="leading" id="FJd-BG-FOl"/>
@@ -275,6 +260,21 @@
                                     <outlet property="delegate" destination="NHA-FS-hgR" id="ilh-Kg-PBN"/>
                                 </connections>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moe-if-lJ1" userLabel="Sharing Button">
+                                <rect key="frame" x="182" y="795" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="DCA-xQ-L1n"/>
+                                    <constraint firstAttribute="height" constant="50" id="iob-HS-dwG"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Sharing Button">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButton:" destination="NHA-FS-hgR" eventType="touchUpInside" id="fhP-nX-6HI"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpK-HE-6tM" userLabel="Backward Button">
                                 <rect key="frame" x="0.0" y="44" width="44" height="44"/>
                                 <constraints>
@@ -292,13 +292,13 @@
                         <viewLayoutGuide key="safeArea" id="las-EW-aOu"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="moe-if-lJ1" firstAttribute="centerX" secondItem="las-EW-aOu" secondAttribute="centerX" id="KiS-do-Yay"/>
+                            <constraint firstItem="moe-if-lJ1" firstAttribute="centerX" secondItem="wNr-0W-Kci" secondAttribute="centerX" id="7wF-nu-ybP"/>
+                            <constraint firstItem="las-EW-aOu" firstAttribute="bottom" secondItem="moe-if-lJ1" secondAttribute="bottom" constant="51" id="F9o-c5-e9Y"/>
                             <constraint firstItem="rpK-HE-6tM" firstAttribute="top" secondItem="wNr-0W-Kci" secondAttribute="top" constant="44" id="PH2-cn-GfL"/>
                             <constraint firstAttribute="trailing" secondItem="ZYP-7z-Hs1" secondAttribute="trailing" id="So9-Z1-zLP"/>
                             <constraint firstItem="ZYP-7z-Hs1" firstAttribute="top" secondItem="wNr-0W-Kci" secondAttribute="top" id="Ysa-bD-97w"/>
                             <constraint firstAttribute="bottom" secondItem="ZYP-7z-Hs1" secondAttribute="bottom" id="Zz0-ZS-f3Z"/>
                             <constraint firstItem="w4C-ar-gVk" firstAttribute="centerX" secondItem="wNr-0W-Kci" secondAttribute="centerX" id="b2m-Ep-sX4"/>
-                            <constraint firstItem="OuT-o6-PXa" firstAttribute="bottom" secondItem="moe-if-lJ1" secondAttribute="bottomMargin" constant="59" id="er5-YI-t6u"/>
                             <constraint firstItem="ZYP-7z-Hs1" firstAttribute="leading" secondItem="wNr-0W-Kci" secondAttribute="leading" id="g4Y-pU-t5Z"/>
                             <constraint firstItem="w4C-ar-gVk" firstAttribute="centerY" secondItem="wNr-0W-Kci" secondAttribute="centerY" id="mXP-ZQ-dtS"/>
                             <constraint firstItem="rpK-HE-6tM" firstAttribute="leading" secondItem="las-EW-aOu" secondAttribute="leading" id="veK-mZ-e7A"/>

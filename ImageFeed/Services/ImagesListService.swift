@@ -28,13 +28,12 @@ final class ImagesListService {
             return
         }
         
-        let nextPage = (lastLoadedPage ?? 0 ) + 1
+        let nextPage = (lastLoadedPage ?? 1)
         
         guard let request = makePhotosRequest(token: token, page: nextPage) else {
             print("ImagesListService fetchPhotosNextPage - failed to create request!")
             return
         }
-        
         
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             
@@ -45,12 +44,12 @@ final class ImagesListService {
             
             switch result {
                 case .success(let photosResult):
-                    lastLoadedPage = nextPage
-                    photos += makePhotosArray(from: photosResult)
+                    self.lastLoadedPage = nextPage + 1
+                    self.photos += makePhotosArray(from: photosResult)
                     NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
                                                     object: self)
                 case.failure(let error):
-                    print( "ImagesListServicen fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
+                    print( "ImagesListService fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
             }
             self.taskIsActive = false
         }
@@ -83,7 +82,7 @@ final class ImagesListService {
         print(request)
         
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<IsLiked, Error>) in
-            guard let self = self else { return }
+            guard self != nil else { return }
             switch result {
                 case.success(let result):
                     completion(.success(result))
@@ -96,11 +95,7 @@ final class ImagesListService {
         task.resume()
     }
     
-    
-    // func fetchUserProfileInfo(accesToken: String?, completion: @escaping (Result<ProfileModel, Error>) -> Void)
     // MARK: - Private Methods
-    
-    
     
     private func makePhotosArray(from photoResultArray: [PhotoResult]) -> [Photo] {
         var photosArray: [Photo] = []
@@ -117,10 +112,10 @@ final class ImagesListService {
             print("makePhotosRequest - failed to create urlString!")
             return nil
         }
-        //TODO: Перед сдачей на ревью, на всякий случай пояснить внутри ПР почему опущен параметр "per_page" - потому что дефолтно и так 10 Number of items per page. (Optional; default: 10)
+        
         urlString.queryItems = [
+            URLQueryItem(name: "per_page", value: "10"),
             URLQueryItem(name: "page", value: String("\(page)"))
-            
         ]
         
         guard let url = urlString.url else {
@@ -135,22 +130,5 @@ final class ImagesListService {
         
         return request
     }
-    
 }
 
-
-// MARK: - Public Properties
-
-// MARK: - IBOutlet
-
-// MARK: - Private Properties
-
-// MARK: - Initializers
-
-// MARK: - UIViewController(*)
-
-// MARK: - Public Methods
-
-// MARK: - IBAction
-
-// MARK: - Private Methods

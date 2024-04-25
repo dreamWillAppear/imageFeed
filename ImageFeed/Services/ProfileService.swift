@@ -62,7 +62,6 @@ final class ProfileService {
         task.resume()
     }
     
-    
     // MARK: - Private Methods
     
     private init() {}

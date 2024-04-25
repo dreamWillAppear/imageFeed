@@ -73,11 +73,9 @@ extension AuthViewController: WebViewViewControllerDelegateProtocol {
                     present(showAuthErrorAlert(), animated: true)
             }
         }
-        
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
     }
-    
 }

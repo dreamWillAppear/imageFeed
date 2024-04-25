@@ -8,14 +8,14 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let profilePhoto = UIImageView()
-    private var nameLabel = UILabel()
-    private var username = UILabel()
-    private let profileDescription = UILabel()
-    private var logoutButton = UIButton()
-    private let appDelegate = AppDelegate()
-    private let profileInfo = ProfileService.shared.profile
-    private var profileImageObserver: NSObjectProtocol?
+    private lazy var profilePhoto = UIImageView()
+    private lazy var nameLabel = UILabel()
+    private lazy var username = UILabel()
+    private lazy var profileDescription = UILabel()
+    private lazy var logoutButton = UIButton()
+    private  var appDelegate = AppDelegate()
+    private  var profileInfo = ProfileService.shared.profile
+    private  var profileImageObserver: NSObjectProtocol?
     
     // MARK: - Public Methods
     
