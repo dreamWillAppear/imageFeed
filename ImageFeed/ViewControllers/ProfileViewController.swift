@@ -1,19 +1,21 @@
 import UIKit
 import Kingfisher
-import  SwiftKeychainWrapper
+import SwiftKeychainWrapper
+import WebKit
+
 
 class ProfileViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let profilePhoto = UIImageView()
-    private var nameLabel = UILabel()
-    private var username = UILabel()
-    private let profileDescription = UILabel()
-    private var logoutButton = UIButton()
-    private let appDelegate = AppDelegate()
-    private let profileInfo = ProfileService.shared.profile
-    private var profileImageObserver: NSObjectProtocol?
+    private lazy var profilePhoto = UIImageView()
+    private lazy var nameLabel = UILabel()
+    private lazy var username = UILabel()
+    private lazy var profileDescription = UILabel()
+    private lazy var logoutButton = UIButton()
+    private  var appDelegate = AppDelegate()
+    private  var profileInfo = ProfileService.shared.profile
+    private  var profileImageObserver: NSObjectProtocol?
     
     // MARK: - Public Methods
     
@@ -39,6 +41,17 @@ class ProfileViewController: UIViewController {
             )
     }
     
+    private func setUIProfileViewController() {
+        super.view.backgroundColor = .ypBlack
+        updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
+        setProfileImage()
+        setProfileNameLabelStyle()
+        setProfileUsernameStyle()
+        setProfileDescriptionStyle()
+        setLogoutButton()
+        setConstraints()
+    }
+    
     private func setProfileImage() {
         
         view.addSubview(profilePhoto)
@@ -60,18 +73,6 @@ class ProfileViewController: UIViewController {
             options: [.processor(processor)]
         )
     }
-    
-    private func setUIProfileViewController() {
-        super.view.backgroundColor = .ypBlack
-        updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
-        setProfileImage()
-        setProfileNameLabelStyle()
-        setProfileUsernameStyle()
-        setProfileDescriptionStyle()
-        setLogoutButton()
-        setConstraints()
-    }
-    
     
     private func updateProfileDetails(profile: ProfileModel?) {
         
@@ -151,11 +152,51 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    //MARK: - @objc
+    private func logout() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(
+            ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()
+        ) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(
+                    ofTypes: record.dataTypes,
+                    for: [record],
+                    completionHandler: {}
+                )
+            }
+        }
+        profilePhoto.image = .profileImageStub
+        nameLabel.text = ""
+        username.text = ""
+        profileDescription.text = ""
+        KeychainWrapper.standard.remove(forKey: "Auth token")
+        guard let window = UIApplication.shared.windows.first else {fatalError("окно не обноружено")}
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
+    }
     
+    private func logoutAlert() {
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены что хотите выйти?",
+            preferredStyle: .alert)
+        
+        let approveLogoutButton =  UIAlertAction(title: "Да", style: . default) { [weak self] _ in
+            guard let self = self else {return}
+            self.logout()
+        }
+        let cancelButton = UIAlertAction(title: "Нет", style: .cancel)
+        
+        alert.addAction(approveLogoutButton)
+        alert.addAction(cancelButton)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: - @objc
+    let imagesService = ImagesListService()
     @objc
     private func didTapLogoutButton() {
-        print("ProfileViewController: - Did tap Logout Button!")
-        KeychainWrapper.standard.removeObject(forKey: "Auth token")
+        logoutAlert()
     }
 }

@@ -67,12 +67,13 @@ final class ProfileImageService {
         task.resume()
     }
     
-    
-    
-    
     // MARK: - Private Methods
     
     private init() {}
+    
+    private func updateTableViewAnimated() {
+        
+    }
     
     private func requestProfileImage(accessToken: String, username: String) -> URLRequest? {
         
