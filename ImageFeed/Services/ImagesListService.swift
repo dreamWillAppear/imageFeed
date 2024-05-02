@@ -102,7 +102,11 @@ final class ImagesListService {
         
         for result in photoResultArray {
             let photo = Photo(from: result)
-            photosArray.append(photo)
+            if !photosArray.contains(where: {
+                $0.id != photo.id
+            }) {
+                photosArray.append(photo)
+            }
         }
         return photosArray
     }

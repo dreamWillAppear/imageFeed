@@ -1,6 +1,6 @@
 import UIKit
 
-enum Constants {
+enum Constants1 {
     static let clientID = "581908"
     static let accessKey = "NldrMyPrwcMXq0g5OliQiG7imahCMw90CU5lPSa5Gbs"
     static let secretKey = "RUGHoaLSINPAPWE9PjiWnta8E7Nx3OlDpwbOdykJwAQ"

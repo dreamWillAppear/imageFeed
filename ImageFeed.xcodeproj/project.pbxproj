@@ -26,6 +26,7 @@
 		16D922932BBB670B00147E16 /* ProfileImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D922922BBB670B00147E16 /* ProfileImageModel.swift */; };
 		16E946CB2BB02BC900E3531B /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E946CA2BB02BC900E3531B /* SplashViewController.swift */; };
 		16E946CD2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E946CC2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift */; };
+		FD011A342BE3E94F00B177C7 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD011A332BE3E94E00B177C7 /* WebViewPresenterSpy.swift */; };
 		FD0720BD2BC8970A001E6581 /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0720BC2BC8970A001E6581 /* ImagesListService.swift */; };
 		FD101E4A2BBF02B2004CB081 /* URL Session + Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD101E492BBF02B2004CB081 /* URL Session + Data.swift */; };
 		FD36AEBB2B70292300E145AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD36AEBA2B70292300E145AE /* AppDelegate.swift */; };
@@ -38,12 +39,16 @@
 		FD37D87A2BC34EDD00609059 /* Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD37D8792BC34EDD00609059 /* Kingfisher.swift */; };
 		FD37D87D2BC4A3F500609059 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = FD37D87C2BC4A3F500609059 /* SwiftKeychainWrapper */; };
 		FD5AE80E2BD9BE3A00CE65B9 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */; };
+		FDA415832BE19019007AFE00 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA415822BE19019007AFE00 /* WebViewPresenter.swift */; };
+		FDA415852BE2A5FF007AFE00 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA415842BE2A5FF007AFE00 /* AuthConfiguration.swift */; };
+		FDA415872BE2A905007AFE00 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA415862BE2A905007AFE00 /* AuthHelper.swift */; };
+		FDB6E4FA2BE3E11800317591 /* ImageFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB6E4F92BE3E11800317591 /* ImageFeedTests.swift */; };
 		FDD4205A2BB4C8B600EBC517 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FDD420592BB4C8B600EBC517 /* ProgressHUD */; };
 		FDED610C2BC73BFD00394A6D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDED610B2BC73BFD00394A6D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		168D8F7E2BCA94F20069908B /* PBXContainerItemProxy */ = {
+		FDB6E4FB2BE3E11800317591 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FD36AEAF2B70292300E145AE /* Project object */;
 			proxyType = 1;
@@ -55,7 +60,6 @@
 /* Begin PBXFileReference section */
 		163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		167A95422BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBodyModel.swift; sourceTree = "<group>"; };
-		168D8F7A2BCA94F20069908B /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		169050802BB8202200CA2E8A /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		169050822BB821A300CA2E8A /* ProfileResponseBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseBodyModel.swift; sourceTree = "<group>"; };
 		169050882BB826F000CA2E8A /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		16D922922BBB670B00147E16 /* ProfileImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageModel.swift; sourceTree = "<group>"; };
 		16E946CA2BB02BC900E3531B /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		16E946CC2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegateProtocol.swift; sourceTree = "<group>"; };
+		FD011A332BE3E94E00B177C7 /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
 		FD0720BC2BC8970A001E6581 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
 		FD101E492BBF02B2004CB081 /* URL Session + Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL Session + Data.swift"; sourceTree = "<group>"; };
 		FD36AEB72B70292300E145AE /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,17 +90,16 @@
 		FD36AEC82B70292400E145AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD37D8792BC34EDD00609059 /* Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kingfisher.swift; sourceTree = "<group>"; };
 		FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
+		FDA415822BE19019007AFE00 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		FDA415842BE2A5FF007AFE00 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
+		FDA415862BE2A905007AFE00 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		FDB6E4F72BE3E11800317591 /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDB6E4F92BE3E11800317591 /* ImageFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedTests.swift; sourceTree = "<group>"; };
+		FDB6E5002BE3E24600317591 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		FDED610B2BC73BFD00394A6D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		168D8F772BCA94F20069908B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FD36AEB42B70292300E145AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -103,6 +107,13 @@
 				FD37D8772BC34E9200609059 /* Kingfisher in Frameworks */,
 				FDD4205A2BB4C8B600EBC517 /* ProgressHUD in Frameworks */,
 				FD37D87D2BC4A3F500609059 /* SwiftKeychainWrapper in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDB6E4F42BE3E11800317591 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +135,6 @@
 				169050822BB821A300CA2E8A /* ProfileResponseBodyModel.swift */,
 				1690508A2BB9830000CA2E8A /* ProfileModel.swift */,
 				167A95422BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift */,
-				16C5536D2B9C873000172353 /* WebViewViewControllerDelegateProtocol.swift */,
 				16E946CC2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift */,
 				16D922922BBB670B00147E16 /* ProfileImageModel.swift */,
 				16C1995B2BCB30E7005B20A8 /* PhotoResult+Photo+UrlsResult+IsLiked Models.swift */,
@@ -149,7 +159,9 @@
 		FD36AEAE2B70292300E145AE = {
 			isa = PBXGroup;
 			children = (
+				FDB6E5002BE3E24600317591 /* TestPlan.xctestplan */,
 				FD36AEB92B70292300E145AE /* ImageFeed */,
+				FDB6E4F82BE3E11800317591 /* ImageFeedTests */,
 				FD36AEB82B70292300E145AE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				FD36AEB72B70292300E145AE /* ImageFeed.app */,
-				168D8F7A2BCA94F20069908B /* ImageFeedTests.xctest */,
+				FDB6E4F72BE3E11800317591 /* ImageFeedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +182,7 @@
 				FD36AEBC2B70292300E145AE /* SceneDelegate.swift */,
 				16C553662B94F64E00172353 /* Constants.swift */,
 				FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */,
+				FDA415812BE18DEC007AFE00 /* Auth */,
 				16C5536F2B9CA36600172353 /* Protocols+Models */,
 				FDED610D2BC74E5400394A6D /* ViewControllers */,
 				FD101E4B2BBF0305004CB081 /* Services */,
@@ -181,11 +194,31 @@
 			path = ImageFeed;
 			sourceTree = "<group>";
 		};
+		FDA415812BE18DEC007AFE00 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FDA415842BE2A5FF007AFE00 /* AuthConfiguration.swift */,
+				FDA415862BE2A905007AFE00 /* AuthHelper.swift */,
+				16C553692B9C5B0200172353 /* AuthViewController.swift */,
+				FDA415822BE19019007AFE00 /* WebViewPresenter.swift */,
+				16C5536D2B9C873000172353 /* WebViewViewControllerDelegateProtocol.swift */,
+				16C5536B2B9C5BD300172353 /* WebViewViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FDB6E4F82BE3E11800317591 /* ImageFeedTests */ = {
+			isa = PBXGroup;
+			children = (
+				FDB6E4F92BE3E11800317591 /* ImageFeedTests.swift */,
+				FD011A332BE3E94E00B177C7 /* WebViewPresenterSpy.swift */,
+			);
+			path = ImageFeedTests;
+			sourceTree = "<group>";
+		};
 		FDED610D2BC74E5400394A6D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				16C553692B9C5B0200172353 /* AuthViewController.swift */,
-				16C5536B2B9C5BD300172353 /* WebViewViewController.swift */,
 				16D3FBE22B8108BC00C4F96F /* ProfileViewController.swift */,
 				FDED610B2BC73BFD00394A6D /* TabBarController.swift */,
 				16E946CA2BB02BC900E3531B /* SplashViewController.swift */,
@@ -207,24 +240,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		168D8F792BCA94F20069908B /* ImageFeedTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 168D8F822BCA94F20069908B /* Build configuration list for PBXNativeTarget "ImageFeedTests" */;
-			buildPhases = (
-				168D8F762BCA94F20069908B /* Sources */,
-				168D8F772BCA94F20069908B /* Frameworks */,
-				168D8F782BCA94F20069908B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				168D8F7F2BCA94F20069908B /* PBXTargetDependency */,
-			);
-			name = ImageFeedTests;
-			productName = ImageFeedTests;
-			productReference = 168D8F7A2BCA94F20069908B /* ImageFeedTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		FD36AEB62B70292300E145AE /* ImageFeed */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD36AECB2B70292400E145AE /* Build configuration list for PBXNativeTarget "ImageFeed" */;
@@ -247,6 +262,24 @@
 			productReference = FD36AEB72B70292300E145AE /* ImageFeed.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FDB6E4F62BE3E11800317591 /* ImageFeedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDB6E4FF2BE3E11800317591 /* Build configuration list for PBXNativeTarget "ImageFeedTests" */;
+			buildPhases = (
+				FDB6E4F32BE3E11800317591 /* Sources */,
+				FDB6E4F42BE3E11800317591 /* Frameworks */,
+				FDB6E4F52BE3E11800317591 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDB6E4FC2BE3E11800317591 /* PBXTargetDependency */,
+			);
+			name = ImageFeedTests;
+			productName = ImageFeedTests;
+			productReference = FDB6E4F72BE3E11800317591 /* ImageFeedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -257,12 +290,12 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					168D8F792BCA94F20069908B = {
-						CreatedOnToolsVersion = 15.0;
-						TestTargetID = FD36AEB62B70292300E145AE;
-					};
 					FD36AEB62B70292300E145AE = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					FDB6E4F62BE3E11800317591 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = FD36AEB62B70292300E145AE;
 					};
 				};
 			};
@@ -285,19 +318,12 @@
 			projectRoot = "";
 			targets = (
 				FD36AEB62B70292300E145AE /* ImageFeed */,
-				168D8F792BCA94F20069908B /* ImageFeedTests */,
+				FDB6E4F62BE3E11800317591 /* ImageFeedTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		168D8F782BCA94F20069908B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FD36AEB52B70292300E145AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -308,22 +334,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		168D8F762BCA94F20069908B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		FDB6E4F52BE3E11800317591 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		FD36AEB32B70292300E145AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				16E946CD2BB0354300E3531B /* AuthViewControllerDelegateProtocol.swift in Sources */,
 				FD36AEBF2B70292300E145AE /* ImagesListViewController.swift in Sources */,
+				FDA415832BE19019007AFE00 /* WebViewPresenter.swift in Sources */,
 				16D922932BBB670B00147E16 /* ProfileImageModel.swift in Sources */,
 				16C5536E2B9C873000172353 /* WebViewViewControllerDelegateProtocol.swift in Sources */,
 				169050812BB8202200CA2E8A /* UIBlockingProgressHUD.swift in Sources */,
@@ -344,6 +371,8 @@
 				FD101E4A2BBF02B2004CB081 /* URL Session + Data.swift in Sources */,
 				16C5536A2B9C5B0200172353 /* AuthViewController.swift in Sources */,
 				16C553672B94F64E00172353 /* Constants.swift in Sources */,
+				FDA415872BE2A905007AFE00 /* AuthHelper.swift in Sources */,
+				FDA415852BE2A5FF007AFE00 /* AuthConfiguration.swift in Sources */,
 				16D22C442B8257A300099C75 /* SingleImageViewController.swift in Sources */,
 				16D922912BBB65DD00147E16 /* ProfileImageService.swift in Sources */,
 				16C5536C2B9C5BD300172353 /* WebViewViewController.swift in Sources */,
@@ -352,13 +381,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FDB6E4F32BE3E11800317591 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDB6E4FA2BE3E11800317591 /* ImageFeedTests.swift in Sources */,
+				FD011A342BE3E94F00B177C7 /* WebViewPresenterSpy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		168D8F7F2BCA94F20069908B /* PBXTargetDependency */ = {
+		FDB6E4FC2BE3E11800317591 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FD36AEB62B70292300E145AE /* ImageFeed */;
-			targetProxy = 168D8F7E2BCA94F20069908B /* PBXContainerItemProxy */;
+			targetProxy = FDB6E4FB2BE3E11800317591 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -382,44 +420,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		168D8F802BCA94F20069908B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BM4848JBAW;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.dreamlogin.ImageFeedTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageFeed.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ImageFeed";
-			};
-			name = Debug;
-		};
-		168D8F812BCA94F20069908B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BM4848JBAW;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.dreamlogin.ImageFeedTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageFeed.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ImageFeed";
-			};
-			name = Release;
-		};
 		FD36AEC92B70292400E145AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -603,18 +603,47 @@
 			};
 			name = Release;
 		};
+		FDB6E4FD2BE3E11800317591 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BM4848JBAW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dreamlogin.ImageFeedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageFeed.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ImageFeed";
+			};
+			name = Debug;
+		};
+		FDB6E4FE2BE3E11800317591 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BM4848JBAW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dreamlogin.ImageFeedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageFeed.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ImageFeed";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		168D8F822BCA94F20069908B /* Build configuration list for PBXNativeTarget "ImageFeedTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				168D8F802BCA94F20069908B /* Debug */,
-				168D8F812BCA94F20069908B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		FD36AEB22B70292300E145AE /* Build configuration list for PBXProject "ImageFeed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -629,6 +658,15 @@
 			buildConfigurations = (
 				FD36AECC2B70292400E145AE /* Debug */,
 				FD36AECD2B70292400E145AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDB6E4FF2BE3E11800317591 /* Build configuration list for PBXNativeTarget "ImageFeedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDB6E4FD2BE3E11800317591 /* Debug */,
+				FDB6E4FE2BE3E11800317591 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
