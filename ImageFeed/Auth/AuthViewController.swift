@@ -2,6 +2,10 @@ import UIKit
 import ProgressHUD
 import SwiftKeychainWrapper
 
+protocol AuthViewControllerDelegateProtocol: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController)
+}
+
 final class AuthViewController: UIViewController {
     
     //MARK: - Public Properties
