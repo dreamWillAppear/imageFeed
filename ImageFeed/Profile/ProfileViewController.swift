@@ -5,6 +5,7 @@ import WebKit
 
 public protocol ProfileViewControllerProtocol: AnyObject {
     var presenter: ProfilePresenterProtocol? { get set }
+    var profilePhoto: UIImageView { get set }
     func viewDidLoad()
 }
 
@@ -12,19 +13,18 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     
     // MARK: - Public Properties
     
+    lazy var profilePhoto = UIImageView()
     var presenter: ProfilePresenterProtocol?
     
     // MARK: - Private Properties
     
-    private lazy var profilePhoto = UIImageView()
     private lazy var nameLabel = UILabel()
     private lazy var username = UILabel()
     private lazy var profileDescription = UILabel()
     private lazy var logoutButton = UIButton()
     private  var appDelegate = AppDelegate()
     private  var profileInfo = ProfileService.shared.profile
-    private  var profileImageObserver: NSObjectProtocol?
-    
+      
     // MARK: - Public Methods
     
     override func viewDidLoad() {
@@ -34,22 +34,31 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         setUIProfileViewController()
     }
     
+    func setProfileImage() {
+       view.addSubview(profilePhoto)
+        profilePhoto.layer.masksToBounds = true
+       profilePhoto.image = UIImage(named: "ProfileImageStub")
+       
+        guard let url = presenter?.getProfileImageURL(from:  ProfileImageService.shared.profileImageURL)
+       else {
+           print("ProfileViewController setProfileImage(45) - profileImageURL is nil!")
+           return
+       }
+       
+      let roundProcessor = RoundCornerImageProcessor(cornerRadius: 61)
+        
+       profilePhoto.kf.setImage(
+           with: url,
+           placeholder: UIImage(named: "ProfileImageStub"),
+           options: [
+            .processor(roundProcessor)
+              ]
+       )
+   }
+    
     
     // MARK: - Private Methods
-    
-    private func addObserver() {
-        profileImageObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main,
-                using: { [weak self] _ in
-                    guard let self = self else { return }
-                    self.setProfileImage()
-                }
-            )
-    }
-    
+        
     private func setUIProfileViewController() {
         super.view.backgroundColor = .ypBlack
         updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
@@ -59,28 +68,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         setProfileDescriptionStyle()
         setLogoutButton()
         setConstraints()
-    }
-    
-    private func setProfileImage() {
-        
-        view.addSubview(profilePhoto)
-        
-        profilePhoto.image = UIImage(named: "ProfileImageStub")
-        
-        guard
-            let profileImageURL = ProfileImageService.shared.profileImageURL,
-            let url = URL(string: profileImageURL)
-        else {
-            print("ProfileViewController setProfileImage(45) - profileImageURL is nil!")
-            return
-        }
-        
-        let processor = RoundCornerImageProcessor(cornerRadius: 61)
-        profilePhoto.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "ProfileImageStub"),
-            options: [.processor(processor)]
-        )
     }
     
     private func updateProfileDetails(profile: ProfileModel?) {

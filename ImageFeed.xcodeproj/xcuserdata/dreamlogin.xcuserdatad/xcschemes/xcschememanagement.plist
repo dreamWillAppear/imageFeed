@@ -7,12 +7,17 @@
 		<key>ImageFeed.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>ImageFeedTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>FD36AEB62B70292300E145AE</key>
+		<key>FDB6E4F62BE3E11800317591</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -144,6 +144,8 @@
 				1690508A2BB9830000CA2E8A /* ProfileModel.swift */,
 				16D922922BBB670B00147E16 /* ProfileImageModel.swift */,
 				169050822BB821A300CA2E8A /* ProfileResponseBodyModel.swift */,
+				169050882BB826F000CA2E8A /* ProfileService.swift */,
+				16D922902BBB65DD00147E16 /* ProfileImageService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -153,8 +155,6 @@
 			children = (
 				FD101E492BBF02B2004CB081 /* URL Session + Data.swift */,
 				163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */,
-				169050882BB826F000CA2E8A /* ProfileService.swift */,
-				16D922902BBB65DD00147E16 /* ProfileImageService.swift */,
 				FD0720BC2BC8970A001E6581 /* ImagesListService.swift */,
 				FDED610E2BC75E5900394A6D /* ExternalLibraries */,
 			);
