@@ -8,9 +8,11 @@ final class TabBarController: UITabBarController {
         super.awakeFromNib()
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        
         let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
+        
         let profileVewController = ProfileViewController()
+        let profilePresenter = ProfileViewPresenter()
+        profileVewController.presenter = profilePresenter
         
         configureTabBarButtonsFor(profileVewController, and: imagesListViewController)
         

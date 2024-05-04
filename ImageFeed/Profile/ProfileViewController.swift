@@ -3,8 +3,16 @@ import Kingfisher
 import SwiftKeychainWrapper
 import WebKit
 
+public protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+    func viewDidLoad()
+}
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    // MARK: - Public Properties
+    
+    var presenter: ProfilePresenterProtocol?
     
     // MARK: - Private Properties
     
@@ -21,8 +29,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIProfileViewController()
+        presenter?.viewDidLoad()
         
+        setUIProfileViewController()
     }
     
     
@@ -152,29 +161,6 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    private func logout() {
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-        WKWebsiteDataStore.default().fetchDataRecords(
-            ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()
-        ) { records in
-            records.forEach { record in
-                WKWebsiteDataStore.default().removeData(
-                    ofTypes: record.dataTypes,
-                    for: [record],
-                    completionHandler: {}
-                )
-            }
-        }
-        profilePhoto.image = .profileImageStub
-        nameLabel.text = ""
-        username.text = ""
-        profileDescription.text = ""
-        KeychainWrapper.standard.remove(forKey: "Auth token")
-        guard let window = UIApplication.shared.windows.first else {fatalError("окно не обноружено")}
-        window.rootViewController = SplashViewController()
-        window.makeKeyAndVisible()
-    }
-    
     private func logoutAlert() {
         let alert = UIAlertController(
             title: "Пока, пока!",
@@ -183,8 +169,9 @@ class ProfileViewController: UIViewController {
         
         let approveLogoutButton =  UIAlertAction(title: "Да", style: . default) { [weak self] _ in
             guard let self = self else {return}
-            self.logout()
+            self.presenter?.logout()
         }
+        
         let cancelButton = UIAlertAction(title: "Нет", style: .cancel)
         
         alert.addAction(approveLogoutButton)
