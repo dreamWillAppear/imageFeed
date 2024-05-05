@@ -7,6 +7,8 @@ public protocol ProfileViewControllerProtocol: AnyObject {
     var presenter: ProfilePresenterProtocol? { get set }
     var profilePhoto: UIImageView { get set }
     func viewDidLoad()
+    func setProfileImage()
+    func updateProfileInfo()
 }
 
 class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
@@ -23,64 +25,60 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     private lazy var profileDescription = UILabel()
     private lazy var logoutButton = UIButton()
     private  var appDelegate = AppDelegate()
-    private  var profileInfo = ProfileService.shared.profile
-      
+    private var profileInfo = ProfileService.shared.profile
+    private var profileInfoModel = ProfileService.shared.profile
+    
     // MARK: - Public Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
-        
         setUIProfileViewController()
     }
     
     func setProfileImage() {
-       view.addSubview(profilePhoto)
-        profilePhoto.layer.masksToBounds = true
-       profilePhoto.image = UIImage(named: "ProfileImageStub")
-       
+        view.addSubview(profilePhoto)
+        profilePhoto.image = UIImage(named: "ProfileImageStub")
         guard let url = presenter?.getProfileImageURL(from:  ProfileImageService.shared.profileImageURL)
-       else {
-           print("ProfileViewController setProfileImage(45) - profileImageURL is nil!")
-           return
-       }
-       
-      let roundProcessor = RoundCornerImageProcessor(cornerRadius: 61)
+        else {
+            print("ProfileViewController setProfileImage(45) - profileImageURL is nil!")
+            return
+        }
         
-       profilePhoto.kf.setImage(
-           with: url,
-           placeholder: UIImage(named: "ProfileImageStub"),
-           options: [
-            .processor(roundProcessor)
-              ]
-       )
-   }
+        profilePhoto.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "ProfileImageStub")
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.profilePhoto.clipsToBounds = true
+                self.profilePhoto.layer.cornerRadius = self.profilePhoto.bounds.height / 2
+            case.failure(_):
+                profilePhoto.image = .stub
+            }
+        }
+    }
+    
+    
+    func updateProfileInfo() {
+        presenter?.getProfileInfo(from: profileInfo)
+        username.text = presenter?.profileInfo.username
+        nameLabel.text = presenter?.profileInfo.nameLabel
+        profileDescription.text = presenter?.profileInfo.profileDescription
+    }
     
     
     // MARK: - Private Methods
-        
+    
     private func setUIProfileViewController() {
         super.view.backgroundColor = .ypBlack
-        updateProfileDetails(profile: profileInfo) //Getting data from ProfileService
+        updateProfileInfo()
         setProfileImage()
         setProfileNameLabelStyle()
         setProfileUsernameStyle()
         setProfileDescriptionStyle()
-        setLogoutButton()
+        setLogoutButtonStyle()
         setConstraints()
-    }
-    
-    private func updateProfileDetails(profile: ProfileModel?) {
-        
-        guard let profile else
-        {
-            print("ProfileViewController updateProfileDetails (70) - Failed to get data from ProfileService!")
-            return
-        }
-        
-        username.text = "@" + profile.username
-        nameLabel.text = profile.nameLabel
-        profileDescription.text = profile.bio
     }
     
     private func setProfileNameLabelStyle() {
@@ -102,7 +100,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         
     }
     
-    private func setLogoutButton() {
+    private func setLogoutButtonStyle() {
         logoutButton = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward") ?? .profileImageStub,
             target: self,

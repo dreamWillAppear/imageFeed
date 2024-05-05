@@ -16,6 +16,7 @@ protocol WebViewViewControllerDelegateProtocol: AnyObject {
 final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
 
     //MARK: - Public Properties
+    
     var presenter: WebViewPresenterProtocol?
     weak var delegate: WebViewViewControllerDelegateProtocol?
     

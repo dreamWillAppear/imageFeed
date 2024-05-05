@@ -2,25 +2,29 @@ import Foundation
 import SwiftKeychainWrapper
 import WebKit
 
+
+public struct ProfileInfo {
+    var username: String
+    var nameLabel: String
+    var profileDescription: String
+}
+
 public protocol ProfilePresenterProtocol {
-    var view: ProfileViewControllerProtocol? { get set }
-    func viewDidLoad()
+
+    var profileInfo: ProfileInfo { get set }
     func logout()
     func getProfileImageURL(from URLString: String?) -> URL?
-    
+    func getProfileInfo(from profileModel: ProfileModel?)
 }
 
 final class ProfileViewPresenter: ProfilePresenterProtocol {
-    
+
     // MARK: - Public Properties
     
     weak var view: ProfileViewControllerProtocol?
-    
+    var profileInfo = ProfileInfo(username: "", nameLabel: "", profileDescription: "")
+
     // MARK: - Public Methods
-    
-    func viewDidLoad() {
-        
-    }
     
     func logout() {
         view?.profilePhoto.image = .stub
@@ -51,6 +55,17 @@ final class ProfileViewPresenter: ProfilePresenterProtocol {
             return nil
         }
         return  URL(string: urlString)
+    }
+    
+    func getProfileInfo(from profileModel: ProfileModel?) {
+        guard let profileModel else
+        {
+            print("ProfilePresenter getProfileInfo - Failed to get data from ProfileService!")
+            return
+        }
+        profileInfo.username = profileModel.username
+        profileInfo.nameLabel = profileModel.nameLabel
+        profileInfo.profileDescription = profileModel.bio
     }
     
 }

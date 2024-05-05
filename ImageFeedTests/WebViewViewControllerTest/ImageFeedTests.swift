@@ -1,7 +1,7 @@
 @testable import ImageFeed
 import XCTest
 
-final class ImageFeedTests: XCTestCase {
+final class WebViewViewControllerTests: XCTestCase {
     
     func testViewControllerCallsViewDidLoad() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -83,6 +83,5 @@ final class ImageFeedTests: XCTestCase {
         
         XCTAssertEqual(code, "test code")
     }
-    
-    
+     
 }

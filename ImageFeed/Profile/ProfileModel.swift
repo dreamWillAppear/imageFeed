@@ -1,4 +1,4 @@
-struct ProfileModel {
+public struct ProfileModel {
     var username: String
     var nameLabel: String
     var bio: String

@@ -4,6 +4,7 @@ import Kingfisher
 final class SingleImageViewController: UIViewController {
     
     //MARK: - Public Properties
+    
     var urlForSingleImageView: URL?
     lazy var image = UIImage()
     
