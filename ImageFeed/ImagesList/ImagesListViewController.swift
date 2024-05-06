@@ -1,16 +1,27 @@
 import UIKit
 import Kingfisher
 
-class ImagesListViewController: UIViewController {
+public protocol ImagesListViewControllerProtocol: AnyObject {
+    var presenter: ImagesListPresenterProtocol? { get set }
+    var tableView: UITableView! { get set }
+    var photos: [Photo] { get set }
+}
+
+class ImagesListViewController: UIViewController & ImagesListViewControllerProtocol {
+    
+    //MARK: - Public Properties
+    
+    var presenter: ImagesListPresenterProtocol?
+
     
     // MARK: - IBOutlet
     
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet  var tableView: UITableView!
     
     // MARK: - Private Properties
-    private let imagesListService = ImagesListService()
+    private let imagesListService = ImagesListService.shared
     private var imagesListNotificationObserver: NSObjectProtocol?
-    private var photos: [Photo] = []
+     var photos: [Photo] = []
     private let showSingleImage = "ShowSingleImage"
     
     
@@ -18,7 +29,8 @@ class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 200
+        
+        presenter?.viewDidLoad()
         observeImagesListChanges()
     }
     
@@ -42,17 +54,18 @@ class ImagesListViewController: UIViewController {
     //MARK: - Private methods
     
     private func updateTableViewAnimated() {
-        let oldCount = photos.count
-        let newCount = imagesListService.photos.count
-        photos = imagesListService.photos
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                let indexPaths = (oldCount..<newCount).map { i in
-                    IndexPath(row: i, section: 0)
-                }
-                tableView.insertRows(at: indexPaths, with: .automatic)
-            } completion: { _ in }
-        }
+       presenter?.updateTableViewAnimated()
+//        let oldCount = photos.count
+//        let newCount = imagesListService.photos.count
+//        photos = imagesListService.photos
+//        if oldCount != newCount {
+//            tableView.performBatchUpdates {
+//                let indexPaths = (oldCount..<newCount).map { i in
+//                    IndexPath(row: i, section: 0)
+//                }
+//                tableView.insertRows(at: indexPaths, with: .automatic)
+//            } completion: { _ in }
+//        }
     }
     
     private func observeImagesListChanges() {
@@ -141,6 +154,7 @@ extension ImagesListViewController: ImagesListCellDelegateProtocol {
     }
     
     func didTapLikeButton(from cell: ImagesListCell) {
+        UIBlockingProgressHUD.show()
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
         imagesListService.changeLike(photoId: photo.id, isLike: cell.isAlreadyLiked ? false : true) { [weak self] result in

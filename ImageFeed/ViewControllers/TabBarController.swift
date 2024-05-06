@@ -8,11 +8,20 @@ final class TabBarController: UITabBarController {
         super.awakeFromNib()
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
+        guard  let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as? ImagesListViewController else { 
+            print("TabBarController awakeFromNib - Unable to instantiate ImagesListViewController from storyboard!")
+            return
+        }
+        
+        let imagesListPresenter = ImagesListPresenter()
+        imagesListViewController.presenter = imagesListPresenter
+        imagesListPresenter.view = imagesListViewController
         
         let profileVewController = ProfileViewController()
         let profilePresenter = ProfileViewPresenter()
         profileVewController.presenter = profilePresenter
+        
+        
         
         configureTabBarButtonsFor(profileVewController, and: imagesListViewController)
         

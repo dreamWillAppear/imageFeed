@@ -5,6 +5,8 @@ final class ImagesListService {
     
     // MARK: - Public Properties
     
+    static let shared = ImagesListService()
+    
     // MARK: - Private Properties
     
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
@@ -59,7 +61,6 @@ final class ImagesListService {
     
     func changeLike(photoId: String, isLike: Bool, completion: @escaping (Result<IsLiked, Error>) -> Void) {
         assert(Thread.isMainThread)
-        UIBlockingProgressHUD.show()
         guard taskIsActive == false else {
             print("Like Task Is Already Active!")
             return
@@ -96,6 +97,8 @@ final class ImagesListService {
     }
     
     // MARK: - Private Methods
+    
+    private init() {}
     
     private func makePhotosArray(from photoResultArray: [PhotoResult]) -> [Photo] {
         var photosArray: [Photo] = []

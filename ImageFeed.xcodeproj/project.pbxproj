@@ -45,6 +45,7 @@
 		FDA415872BE2A905007AFE00 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA415862BE2A905007AFE00 /* AuthHelper.swift */; };
 		FDB6E4FA2BE3E11800317591 /* WebViewViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB6E4F92BE3E11800317591 /* WebViewViewControllerTests.swift */; };
 		FDD4205A2BB4C8B600EBC517 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FDD420592BB4C8B600EBC517 /* ProgressHUD */; };
+		FDE9FE102BE981EA000902FB /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE9FE0F2BE981EA000902FB /* ImagesListPresenter.swift */; };
 		FDED610C2BC73BFD00394A6D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDED610B2BC73BFD00394A6D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		FDB6E4F72BE3E11800317591 /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB6E4F92BE3E11800317591 /* WebViewViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerTests.swift; sourceTree = "<group>"; };
 		FDB6E5002BE3E24600317591 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		FDE9FE0F2BE981EA000902FB /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
 		FDED610B2BC73BFD00394A6D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +128,10 @@
 			isa = PBXGroup;
 			children = (
 				FD36AEBE2B70292300E145AE /* ImagesListViewController.swift */,
+				FDE9FE0F2BE981EA000902FB /* ImagesListPresenter.swift */,
 				169A00492B78BD4200CCA16D /* ImagesListCell.swift */,
+				FD0720BC2BC8970A001E6581 /* ImagesListService.swift */,
+				16C1995B2BCB30E7005B20A8 /* PhotoResult+Photo+UrlsResult+IsLiked Models.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -134,7 +139,6 @@
 		16C5536F2B9CA36600172353 /* Protocols+Models */ = {
 			isa = PBXGroup;
 			children = (
-				16C1995B2BCB30E7005B20A8 /* PhotoResult+Photo+UrlsResult+IsLiked Models.swift */,
 				16C1995D2BCC7900005B20A8 /* ImagesListCellDelegateProtocol.swift */,
 			);
 			path = "Protocols+Models";
@@ -176,8 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				FD101E492BBF02B2004CB081 /* URL Session + Data.swift */,
-				163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */,
-				FD0720BC2BC8970A001E6581 /* ImagesListService.swift */,
 				FDED610E2BC75E5900394A6D /* ExternalLibraries */,
 			);
 			path = Services;
@@ -209,8 +211,9 @@
 				FD36AEBC2B70292300E145AE /* SceneDelegate.swift */,
 				16C553662B94F64E00172353 /* Constants.swift */,
 				FD5AE80D2BD9BE3A00CE65B9 /* DateFormatters.swift */,
-				FD011A352BE58FC700B177C7 /* Profile */,
 				FDA415812BE18DEC007AFE00 /* Auth */,
+				FD011A352BE58FC700B177C7 /* Profile */,
+				169A004B2B78BD7B00CCA16D /* ImagesList */,
 				16C5536F2B9CA36600172353 /* Protocols+Models */,
 				FDED610D2BC74E5400394A6D /* ViewControllers */,
 				FD101E4B2BBF0305004CB081 /* Services */,
@@ -231,6 +234,7 @@
 				FDA415842BE2A5FF007AFE00 /* AuthConfiguration.swift */,
 				FDA415862BE2A905007AFE00 /* AuthHelper.swift */,
 				167A95422BA5BF0D006F2768 /* OAuthTokenResponseBodyModel.swift */,
+				163D39062BA4AAAF00DA89AC /* OAuth2Service.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -250,7 +254,6 @@
 				FDED610B2BC73BFD00394A6D /* TabBarController.swift */,
 				16E946CA2BB02BC900E3531B /* SplashViewController.swift */,
 				16D22C432B8257A300099C75 /* SingleImageViewController.swift */,
-				169A004B2B78BD7B00CCA16D /* ImagesList */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				16D922912BBB65DD00147E16 /* ProfileImageService.swift in Sources */,
 				16C5536C2B9C5BD300172353 /* WebViewViewController.swift in Sources */,
 				FD37D87A2BC34EDD00609059 /* Kingfisher.swift in Sources */,
+				FDE9FE102BE981EA000902FB /* ImagesListPresenter.swift in Sources */,
 				FD36AEBD2B70292300E145AE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

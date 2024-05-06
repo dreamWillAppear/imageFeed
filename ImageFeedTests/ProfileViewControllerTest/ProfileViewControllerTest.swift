@@ -35,17 +35,5 @@ final class ProfileViewControllerTest: XCTestCase {
         
         XCTAssertTrue(presenter.getProfileInfoDidCall)
     }
-    
-    
+        
 }
-
-
-/*
- func getProfileImageURL(from URLString: String?) -> URL? {
-     guard let urlString = URLString else {
-         print("ProfilePresenter getProfileImageURL - Failed to get URLString")
-         return nil
-     }
-     return  URL(string: urlString)
- }
- */

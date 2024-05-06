@@ -166,7 +166,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     }
     
     //MARK: - @objc
-    let imagesService = ImagesListService()
     @objc
     private func didTapLogoutButton() {
         logoutAlert()

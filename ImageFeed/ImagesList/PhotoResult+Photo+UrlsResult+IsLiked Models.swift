@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - Types
 
-struct Photo: Codable {
+public struct Photo: Codable {
     let id: String
     let size: CGSize
     let createdAt: String

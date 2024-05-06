@@ -10,6 +10,7 @@ public protocol WebViewPresenterProtocol {
 final class WebViewPresenter: WebViewPresenterProtocol {
     
     // MARK: - Public Properties
+    
     weak var view: WebViewViewControllerProtocol?
     var authHelper: AuthHelperProtocol
    
@@ -52,20 +53,3 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         view?.load(request: requset)
     }
 }
-
-
-// MARK: - Public Properties
-
-// MARK: - IBOutlet
-
-// MARK: - Private Properties
-
-// MARK: - Initializers
-
-// MARK: - UIViewController(*)
-
-// MARK: - Public Methods
-
-// MARK: - IBAction
-
-// MARK: - Private Methods

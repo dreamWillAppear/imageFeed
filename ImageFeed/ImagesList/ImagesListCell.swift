@@ -2,9 +2,9 @@ import UIKit
 
 final class ImagesListCell: UITableViewCell {
     static let  reuseIdentifier = "ImagesListCell"
-    let imagesListService =  ImagesListService()
-    var photoId = String()
-    var isAlreadyLiked = Bool()
+    let imagesListService = ImagesListService.shared
+    var photoId = ""
+    var isAlreadyLiked = false
     weak var delegate: ImagesListCellDelegateProtocol?
     
     @IBOutlet weak var likeButton: UIButton!
