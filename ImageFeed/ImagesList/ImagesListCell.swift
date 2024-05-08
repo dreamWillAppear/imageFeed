@@ -1,8 +1,7 @@
 import UIKit
 
-final class ImagesListCell: UITableViewCell {
+public final class ImagesListCell: UITableViewCell {
     static let  reuseIdentifier = "ImagesListCell"
-    let imagesListService = ImagesListService.shared
     var photoId = ""
     var isAlreadyLiked = false
     weak var delegate: ImagesListCellDelegateProtocol?
@@ -15,7 +14,7 @@ final class ImagesListCell: UITableViewCell {
         delegate?.didTapLikeButton(from: self)
     }
     
-    override func prepareForReuse() {
+    public override func prepareForReuse() {
         super.prepareForReuse()
         imageCell.kf.cancelDownloadTask()
     }
