@@ -10,7 +10,6 @@ public struct ProfileInfo {
 }
 
 public protocol ProfilePresenterProtocol {
-
     var profileInfo: ProfileInfo { get set }
     func logout()
     func getProfileImageURL(from URLString: String?) -> URL?
@@ -18,17 +17,15 @@ public protocol ProfilePresenterProtocol {
 }
 
 final class ProfileViewPresenter: ProfilePresenterProtocol {
-
+    
     // MARK: - Public Properties
     
     weak var view: ProfileViewControllerProtocol?
     var profileInfo = ProfileInfo(username: "", nameLabel: "", profileDescription: "")
-
+    
     // MARK: - Public Methods
     
     func logout() {
-        view?.profilePhoto.image = .stub
-        
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         WKWebsiteDataStore.default().fetchDataRecords(
             ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()

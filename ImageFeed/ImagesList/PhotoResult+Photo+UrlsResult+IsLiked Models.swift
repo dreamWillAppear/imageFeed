@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - Types
 
-public struct Photo: Codable {
+struct Photo: Codable {
     let id: String
     let size: CGSize
     let createdAt: String
@@ -16,7 +16,7 @@ public struct Photo: Codable {
         self.size = CGSize(width: result.width, height: result.height)
         self.createdAt = result.createdAt
         self.welcomeDescription = result.description
-        self.thumbImageURL = URL(string: result.urls.regular) 
+        self.thumbImageURL = URL(string: result.urls.regular)
         self.fullImageURL = URL(string: result.urls.full)
         self.likedByUser = result.likedByUser
     }

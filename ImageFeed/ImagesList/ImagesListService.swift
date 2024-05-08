@@ -121,7 +121,7 @@ final class ImagesListService {
         }
         
         urlString.queryItems = [
-            URLQueryItem(name: "per_page", value: "3"),
+            URLQueryItem(name: "per_page", value: "10"),
             URLQueryItem(name: "page", value: String("\(page)"))
         ]
         

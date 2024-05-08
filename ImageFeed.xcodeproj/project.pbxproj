@@ -46,6 +46,8 @@
 		FDB6E4FA2BE3E11800317591 /* WebViewViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB6E4F92BE3E11800317591 /* WebViewViewControllerTests.swift */; };
 		FDD4205A2BB4C8B600EBC517 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FDD420592BB4C8B600EBC517 /* ProgressHUD */; };
 		FDE9FE102BE981EA000902FB /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE9FE0F2BE981EA000902FB /* ImagesListPresenter.swift */; };
+		FDE9FE122BEBB414000902FB /* ImagesListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE9FE112BEBB414000902FB /* ImagesListViewControllerTests.swift */; };
+		FDE9FE152BEBB467000902FB /* ImagesListPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE9FE142BEBB467000902FB /* ImagesListPresenterSpy.swift */; };
 		FDED610C2BC73BFD00394A6D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDED610B2BC73BFD00394A6D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +102,8 @@
 		FDB6E4F92BE3E11800317591 /* WebViewViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerTests.swift; sourceTree = "<group>"; };
 		FDB6E5002BE3E24600317591 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		FDE9FE0F2BE981EA000902FB /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
+		FDE9FE112BEBB414000902FB /* ImagesListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewControllerTests.swift; sourceTree = "<group>"; };
+		FDE9FE142BEBB467000902FB /* ImagesListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenterSpy.swift; sourceTree = "<group>"; };
 		FDED610B2BC73BFD00394A6D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,10 +246,20 @@
 		FDB6E4F82BE3E11800317591 /* ImageFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				FDE9FE132BEBB423000902FB /* ImagesListViewControllerTests */,
 				16F49F462BE846F600AEE12E /* ProfileViewControllerTest */,
 				16F49F3E2BE78BD400AEE12E /* WebViewViewControllerTest */,
 			);
 			path = ImageFeedTests;
+			sourceTree = "<group>";
+		};
+		FDE9FE132BEBB423000902FB /* ImagesListViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				FDE9FE112BEBB414000902FB /* ImagesListViewControllerTests.swift */,
+				FDE9FE142BEBB467000902FB /* ImagesListPresenterSpy.swift */,
+			);
+			path = ImagesListViewControllerTests;
 			sourceTree = "<group>";
 		};
 		FDED610D2BC74E5400394A6D /* ViewControllers */ = {
@@ -418,7 +432,9 @@
 				FDB6E4FA2BE3E11800317591 /* WebViewViewControllerTests.swift in Sources */,
 				16F49F452BE78FFE00AEE12E /* ProfilePresenterSpy.swift in Sources */,
 				FD011A342BE3E94F00B177C7 /* WebViewPresenterSpy.swift in Sources */,
+				FDE9FE122BEBB414000902FB /* ImagesListViewControllerTests.swift in Sources */,
 				16F49F432BE78D8A00AEE12E /* ProfileViewControllerTest.swift in Sources */,
+				FDE9FE152BEBB467000902FB /* ImagesListPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

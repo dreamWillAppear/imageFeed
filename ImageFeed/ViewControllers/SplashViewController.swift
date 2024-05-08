@@ -1,4 +1,4 @@
-import UIKit
+import WebKit
 import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {

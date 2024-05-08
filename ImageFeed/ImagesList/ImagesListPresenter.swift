@@ -28,7 +28,6 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     }
     
     func updateTableViewAnimated() {
-        print("table presenter!!")
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
@@ -45,11 +44,13 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     func configDateString(from date: String) -> String {
         var  formattedDateString = ""
         guard let date = DateFormatters.inputFormatter.date(from: date) else {
-            print("PhotoResultModel - failed to get date!")
+            print("configDateString - failed to get date!")
             return formattedDateString
         }
-        DateFormatters.dateFormatter.dateStyle = .long
-        DateFormatters.dateFormatter.timeStyle = .none
+        
+        DateFormatters.dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        DateFormatters.dateFormatter.locale = Locale(identifier: "ru_RU")
+        DateFormatters.dateFormatter.dateFormat = "d MMMM yyyy"
         formattedDateString = DateFormatters.dateFormatter.string(from: date)
         return formattedDateString
     }

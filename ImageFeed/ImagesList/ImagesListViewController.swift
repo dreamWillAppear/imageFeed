@@ -18,6 +18,7 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
     @IBOutlet  var tableView: UITableView!
     
     // MARK: - Private Properties
+    
     private let imagesListService = ImagesListService.shared
     private var imagesListNotificationObserver: NSObjectProtocol?
     private let showSingleImage = "ShowSingleImage"
