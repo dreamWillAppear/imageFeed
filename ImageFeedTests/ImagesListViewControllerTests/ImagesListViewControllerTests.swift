@@ -3,7 +3,7 @@ import XCTest
 
 class ImagesListViewControllerTests: XCTestCase {
     
-    func testViewControllerCallsViewDidLoad() { 
+    func testViewControllerCallsViewDidLoad() {
         let viewController = ImagesListViewController()
         let presenter = ImagesListPresenterSpy()
         viewController.presenter = presenter
@@ -37,7 +37,7 @@ class ImagesListViewControllerTests: XCTestCase {
         presenter.photo = ImagesListPresenterSpy.Photo(id: "", size: CGSize(width: 1500, height: 2000), createdAt: "", welcomeDescription: nil, thumbImageURL: nil, fullImageURL: nil, likedByUser: true)
         let indexPath = IndexPath(row: 0, section: 0)
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 75, height: 150))
-
+        
         let calculatedHeight = presenter.calculateHeight(forRowAt: indexPath, from: tableView)
         
         let expectedHeight = presenter.photo.size.height * (tableView.bounds.width / presenter.photo.size.width)
@@ -58,55 +58,32 @@ class ImagesListViewControllerTests: XCTestCase {
     }
     
     func testConfigCell() {
-
+        let cell = ImagesListCell()
         let presenter = ImagesListPresenterSpy()
         let indexPath = IndexPath(row: 0, section: 0)
-        presenter.photo =  ImagesListPresenterSpy.Photo(id: "123", size: CGSize(), createdAt: "2016-05-03T11:00:28-04:00", welcomeDescription: "", thumbImageURL: URL(string: ""), fullImageURL: URL(string: "https://mock.url.string"), likedByUser: true)
+        presenter.photo =  ImagesListPresenterSpy.Photo(id: "123", size: CGSize(), createdAt: "", welcomeDescription: "", thumbImageURL: URL(string: ""), fullImageURL: URL(string: "https://mock.url.string"), likedByUser: true)
         
-        presenter.configCell(for: presenter.cell, with: indexPath)
+        presenter.configCell(for: cell, with: indexPath)
         
-       // XCTAssertEqual(cell.isAlreadyLiked, true)
-    }
- 
-    
-    func testTest() {
-    let cell = ImagesListCell()
-        XCTAssertNotNil(cell)
-    
-    }
-//    func testConfigCell()  {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//          // Создаем экземпляр контроллера, из которого загрузим ячейку
-//          let viewController = ImagesListViewController()
-//          // Загружаем таблицу
-//
-//        _ = viewController.view
-//        let presenter = ImagesListPresenterSpy()
-//        let cell = ImagesListCell()
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        guard let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as? ImagesListCell else {
-//                XCTFail("Could not get cell")
-//                return
-//            }
-//        presenter.photo = ImagesListPresenterSpy.Photo(id: "1223", size: CGSize(), createdAt: "2016-05-03T11:00:28-04:00", welcomeDescription: nil, thumbImageURL: nil, fullImageURL: nil, likedByUser: true)
-//
-//        presenter.configCell(for: cell, with: indexPath)
-//        
-//        XCTAssertEqual(cell.photoId, "1223")
-//        XCTAssertEqual(cell.dateLabel.text, "3 мая 2016")
-//        XCTAssertEqual(cell.isAlreadyLiked, true)
-//    }
-    
-}
-class MockTableView: UITableView {
-    
-    // Свойство, которое будет использоваться для хранения числа строк в таблице
-    var numberOfRows = 0
-    
-    // Переопределение метода для имитации возвращения числа строк в секции
-    override func numberOfRows(inSection section: Int) -> Int {
-        return numberOfRows
+        XCTAssertEqual(cell.isAlreadyLiked, true)
+        XCTAssertEqual(cell.photoId, "123")
     }
     
-    // Другие методы и свойства UITableView, которые вы хотите имитировать
+    func testViewControllerCallsDidTapLikeButton() {
+        let presenter = ImagesListPresenterSpy()
+        let cell = ImagesListCell()
+        
+        presenter.didTapLikeButton(from: cell)
+        
+        XCTAssertEqual(presenter.didTapLikeButtonDidCall, true)    
+    }
+    
+    func testViewControllerCallsFetchPhotosNextPage() {
+        let presenter = ImagesListPresenterSpy()
+        
+        presenter.fetchPhotosNextPage()
+        
+        XCTAssertEqual(presenter.fetchPhotosNextPageDidCall, true)
+    }
+    
 }

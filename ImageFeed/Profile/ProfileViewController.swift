@@ -33,9 +33,13 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIProfileViewController()
+        
     }
     
     func setProfileImage() {
+        self.profilePhoto.clipsToBounds = true
+        self.profilePhoto.layer.cornerRadius = self.profilePhoto.bounds.height / 2
+        
         view.addSubview(profilePhoto)
         profilePhoto.image = UIImage(named: "ProfileImageStub")
         guard let url = presenter?.getProfileImageURL(from:  ProfileImageService.shared.profileImageURL)
@@ -51,10 +55,10 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
             guard let self = self else { return }
             switch result {
             case .success(_):
-                self.profilePhoto.clipsToBounds = true
                 self.profilePhoto.layer.cornerRadius = self.profilePhoto.bounds.height / 2
             case.failure(_):
                 profilePhoto.image = .stub
+                self.profilePhoto.layer.cornerRadius = self.profilePhoto.bounds.height / 2
             }
         }
     }
@@ -101,6 +105,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     }
     
     private func setLogoutButtonStyle() {
+        logoutButton.accessibilityIdentifier = "LogoutButton"
         logoutButton = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward") ?? .profileImageStub,
             target: self,

@@ -25,7 +25,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     
     func viewDidLoad() {
         view?.tableView.rowHeight = 200
-    }
+    }   
     
     func updateTableViewAnimated() {
         let oldCount = photos.count
@@ -67,7 +67,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let photo = self.photos[indexPath.row]
-        let photoUrl = photo.thumbImageURL //по факту загружается размер "regular", если грузить "thumb" как указано в курсе - получим ленту шакалов
+        let photoUrl = photo.thumbImageURL
         let dateLabel = configDateString(from: photo.createdAt)
         cell.likeButton.imageView?.image = photo.likedByUser ? .likeButtonActive : .likeButtonInactive
         cell.isAlreadyLiked = photo.likedByUser
@@ -87,14 +87,13 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
         imagesListService.changeLike(photoId: photo.id, isLike: cell.isAlreadyLiked ? false : true) { [weak self] result in
             guard let self = self else  { return }
             switch result {
-                case.success(let result):
-                    //В курсе предлагают просто инвентировать кнопку лайка, но раз запрос после выполнения возвращает состояние фото - логично задействовать это состояние, что бы отобразить действительное наличие лайка. Это сработало, поэтому оставляю так.
-                    cell.likeButton.imageView?.image = result.photo.likedByUser ? .likeButtonActive : .likeButtonInactive
-                    cell.isAlreadyLiked = result.photo.likedByUser
-                    self.view?.uiBlockingProgressHUD(mustBeShown: false)
-                case.failure(let error):
-                    self.view?.uiBlockingProgressHUD(mustBeShown: false)
-                    print(String(describing: error))
+            case.success(let result):
+                cell.likeButton.imageView?.image = result.photo.likedByUser ? .likeButtonActive : .likeButtonInactive
+                cell.isAlreadyLiked = result.photo.likedByUser
+                self.view?.uiBlockingProgressHUD(mustBeShown: false)
+            case.failure(let error):
+                self.view?.uiBlockingProgressHUD(mustBeShown: false)
+                print(String(describing: error))
             }
         }
     }

@@ -32,5 +32,5 @@ final class ProfileViewControllerTest: XCTestCase {
         
         XCTAssertTrue(presenter.getProfileInfoDidCall)
     }
-        
+    
 }

@@ -26,6 +26,7 @@ final class ProfileViewPresenter: ProfilePresenterProtocol {
     // MARK: - Public Methods
     
     func logout() {
+        view?.profilePhoto.image = .stub
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         WKWebsiteDataStore.default().fetchDataRecords(
             ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()
@@ -60,29 +61,9 @@ final class ProfileViewPresenter: ProfilePresenterProtocol {
             print("ProfilePresenter getProfileInfo - Failed to get data from ProfileService!")
             return
         }
-        profileInfo.username = profileModel.username
+        profileInfo.username = "@" + profileModel.username
         profileInfo.nameLabel = profileModel.nameLabel
         profileInfo.profileDescription = profileModel.bio
     }
     
 }
-
-// MARK: - Types
-
-// MARK: - Constants
-
-// MARK: - Public Properties
-
-// MARK: - IBOutlet
-
-// MARK: - Private Properties
-
-// MARK: - Initializers
-
-// MARK: - UIViewController(*)
-
-// MARK: - Public Methods
-
-// MARK: - IBAction
-
-// MARK: - Private Methods

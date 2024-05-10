@@ -1,7 +1,11 @@
 import UIKit
 
+protocol ImagesListCellDelegateProtocol: AnyObject {
+    func didTapLikeButton(from cell: ImagesListCell)
+}
+
 public final class ImagesListCell: UITableViewCell {
-    static let  reuseIdentifier = "ImagesListCell"
+    static let reuseIdentifier = "ImagesListCell"
     public var photoId = ""
     public var isAlreadyLiked = false
     weak var delegate: ImagesListCellDelegateProtocol?
@@ -18,5 +22,4 @@ public final class ImagesListCell: UITableViewCell {
         super.prepareForReuse()
         imageCell.kf.cancelDownloadTask()
     }
-    
 }

@@ -39,6 +39,7 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDq-Ou-DPx" userLabel="Like Button">
                                                     <rect key="frame" x="354" y="4" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="LikeButton"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="5pv-ay-J99"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="UME-BU-5tB"/>
@@ -121,6 +122,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAv-2K-I0c">
                                 <rect key="frame" x="35.5" y="724" width="343" height="48"/>
                                 <color key="backgroundColor" name="YP White"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Authenticate"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="bEa-4c-RBX"/>
                                     <constraint firstAttribute="width" constant="343" id="fj5-DT-ape"/>
@@ -277,6 +279,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpK-HE-6tM" userLabel="Backward Button">
                                 <rect key="frame" x="0.0" y="44" width="44" height="44"/>
+                                <accessibility key="accessibilityConfiguration" identifier="BackwardButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="7j7-jf-RSM"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="NNJ-F3-c2i"/>

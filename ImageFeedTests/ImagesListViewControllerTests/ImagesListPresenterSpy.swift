@@ -3,6 +3,7 @@ import UIKit
 import Kingfisher
 
 final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
+    
     internal  struct Photo: Codable {
         let id: String
         let size: CGSize
@@ -20,6 +21,8 @@ final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     var photosCount: Int = 0
     var viewDidLoadDidCall = false
     var updateTableViewAnimatedDidCall = false
+    var didTapLikeButtonDidCall = false
+    var fetchPhotosNextPageDidCall = false
     
     
     func viewDidLoad() {
@@ -64,22 +67,20 @@ final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let photos = Array(repeating: photo, count: 3)
         let photo = photos[indexPath.row]
-        let photoUrl = photo.thumbImageURL
-        let dateLabel = configDateString(from: photo.createdAt)
+        
         cell.isAlreadyLiked = photo.likedByUser
         cell.photoId = photo.id
     }
     
-    
     func didTapLikeButton(from cell: ImageFeed.ImagesListCell) {
-        
+        didTapLikeButtonDidCall = true
     }
     
     func fetchPhotosNextPage() {
-        
+        fetchPhotosNextPageDidCall = true
     }
-    
 }
+
 
 
 

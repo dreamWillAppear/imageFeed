@@ -54,7 +54,7 @@ final class WebViewViewControllerTests: XCTestCase {
         guard  let url = authHelper.authURL() else {
             XCTFail()
             return
-            }
+        }
         
         let urlString = url.absoluteString
         
@@ -83,5 +83,5 @@ final class WebViewViewControllerTests: XCTestCase {
         
         XCTAssertEqual(code, "test code")
     }
-     
+    
 }

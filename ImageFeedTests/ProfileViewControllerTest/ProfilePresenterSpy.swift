@@ -22,7 +22,7 @@ final class ProfilePresenterSpy: ProfilePresenterProtocol {
         getProfileImageURLdidCall = true
         return nil
     }
-
+    
     func getProfileInfo(from profileModel: ImageFeed.ProfileModel?) {
         getProfileInfoDidCall = true
     }

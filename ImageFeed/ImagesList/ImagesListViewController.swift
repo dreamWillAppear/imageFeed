@@ -48,7 +48,7 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
                 return
             }
             viewController.urlForSingleImageView = presenter?.getUrlStringForSingleImageView(for: indexPath) //передаем в SingleImageViewController url на fullSize фото
-          uiBlockingProgressHUD(mustBeShown: true)
+            uiBlockingProgressHUD(mustBeShown: true)
         } else {
             super.prepare(for: segue, sender: sender)
         }

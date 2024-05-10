@@ -14,7 +14,7 @@ protocol WebViewViewControllerDelegateProtocol: AnyObject {
 }
 
 final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
-
+    
     //MARK: - Public Properties
     
     var presenter: WebViewPresenterProtocol?
@@ -34,7 +34,8 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        webView.accessibilityIdentifier = "UnsplashWebView"
         webView.navigationDelegate = self
         presenter?.viewDidLoad()
         configureProgressView()
@@ -71,11 +72,11 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
     func setProgressValue(_ newValue: Float) {
         progressView.progress = newValue
     }
-
+    
     func setProgressHidden(_ isHidden: Bool) {
         progressView.isHidden = isHidden
     }
-        
+    
     private func configureProgressView() {
         progressView.progressViewStyle = .default
         progressView.progressTintColor = .black

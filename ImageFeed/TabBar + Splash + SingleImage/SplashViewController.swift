@@ -95,12 +95,12 @@ final class SplashViewController: UIViewController {
             guard let self = self else { return }
             
             switch result {
-                case .success(let result):
-                    self.switchToTabBarController()
-                    fetchProfilePhoto(token: token, username: result.username)
-                case.failure(let error):
-                    print("SplashViewController fetchUserProfileInfo (100) - \(String(describing: error))")
-                    return
+            case .success(let result):
+                self.switchToTabBarController()
+                fetchProfilePhoto(token: token, username: result.username)
+            case.failure(let error):
+                print("SplashViewController fetchUserProfileInfo (100) - \(String(describing: error))")
+                return
             }
         }
     }
@@ -112,11 +112,11 @@ final class SplashViewController: UIViewController {
             guard let self = self else { return }
             
             switch result {
-                case.success(_):
-                    self.switchToTabBarController()
-                case.failure(let error):
-                    print("SplashViewController fetchProfileImage (114) - \(String(describing: error))")
-                    return
+            case.success(_):
+                self.switchToTabBarController()
+            case.failure(let error):
+                print("SplashViewController fetchProfileImage (114) - \(String(describing: error))")
+                return
             }
         }
     }
