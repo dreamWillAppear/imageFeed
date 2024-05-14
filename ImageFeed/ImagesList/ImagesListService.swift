@@ -5,6 +5,8 @@ final class ImagesListService {
     
     // MARK: - Public Properties
     
+    static let shared = ImagesListService()
+    
     // MARK: - Private Properties
     
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
@@ -43,13 +45,13 @@ final class ImagesListService {
             }
             
             switch result {
-                case .success(let photosResult):
-                    self.lastLoadedPage = nextPage + 1
-                    self.photos += makePhotosArray(from: photosResult)
-                    NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
-                                                    object: self)
-                case.failure(let error):
-                    print( "ImagesListService fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
+            case .success(let photosResult):
+                self.lastLoadedPage = nextPage + 1
+                self.photos += makePhotosArray(from: photosResult)
+                NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
+                                                object: self)
+            case.failure(let error):
+                print( "ImagesListService fetchPhotosNextPage - failed to get photos! \(String(describing: error))")
             }
             self.taskIsActive = false
         }
@@ -59,7 +61,6 @@ final class ImagesListService {
     
     func changeLike(photoId: String, isLike: Bool, completion: @escaping (Result<IsLiked, Error>) -> Void) {
         assert(Thread.isMainThread)
-        UIBlockingProgressHUD.show()
         guard taskIsActive == false else {
             print("Like Task Is Already Active!")
             return
@@ -84,11 +85,11 @@ final class ImagesListService {
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<IsLiked, Error>) in
             guard self != nil else { return }
             switch result {
-                case.success(let result):
-                    completion(.success(result))
-                case.failure(let error):
-                    completion(.failure(error))
-                    print("changeLike error - \(String(describing: error))")
+            case.success(let result):
+                completion(.success(result))
+            case.failure(let error):
+                completion(.failure(error))
+                print("changeLike error - \(String(describing: error))")
             }
         }
         taskIsActive = false
@@ -97,12 +98,18 @@ final class ImagesListService {
     
     // MARK: - Private Methods
     
+    private init() {}
+    
     private func makePhotosArray(from photoResultArray: [PhotoResult]) -> [Photo] {
         var photosArray: [Photo] = []
         
         for result in photoResultArray {
             let photo = Photo(from: result)
-            photosArray.append(photo)
+            if !photosArray.contains(where: {
+                $0.id != photo.id
+            }) {
+                photosArray.append(photo)
+            }
         }
         return photosArray
     }

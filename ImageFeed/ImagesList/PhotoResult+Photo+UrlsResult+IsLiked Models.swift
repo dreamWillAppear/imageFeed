@@ -16,7 +16,7 @@ struct Photo: Codable {
         self.size = CGSize(width: result.width, height: result.height)
         self.createdAt = result.createdAt
         self.welcomeDescription = result.description
-        self.thumbImageURL = URL(string: result.urls.regular) 
+        self.thumbImageURL = URL(string: result.urls.regular)
         self.fullImageURL = URL(string: result.urls.full)
         self.likedByUser = result.likedByUser
     }

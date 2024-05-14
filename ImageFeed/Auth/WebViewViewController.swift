@@ -1,10 +1,23 @@
 import UIKit
 import WebKit
 
-class WebViewViewController: UIViewController {
+public protocol WebViewViewControllerProtocol: AnyObject {
+    var presenter: WebViewPresenterProtocol? { get set }
+    func load(request: URLRequest)
+    func setProgressValue(_ newValue: Float)
+    func setProgressHidden(_ isHidden: Bool)
+}
+
+protocol WebViewViewControllerDelegateProtocol: AnyObject {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController)
+}
+
+final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
     
     //MARK: - Public Properties
     
+    var presenter: WebViewPresenterProtocol?
     weak var delegate: WebViewViewControllerDelegateProtocol?
     
     //MARK: - IBOutlet
@@ -21,8 +34,10 @@ class WebViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        webView.accessibilityIdentifier = "UnsplashWebView"
         webView.navigationDelegate = self
-        loadAuthView()
+        presenter?.viewDidLoad()
         configureProgressView()
         addAllSubviews()
         setConstraints()
@@ -36,9 +51,13 @@ class WebViewViewController: UIViewController {
              options: [],
              changeHandler: { [weak self] _, _ in
                  guard let self = self else {return}
-                 updateProgress()
+                 presenter?.didUpdateProgressValue(webView.estimatedProgress)
              }
         )
+    }
+    
+    func load(request: URLRequest) {
+        webView.load(request)
     }
     
     //MARK: - IBAction
@@ -50,33 +69,17 @@ class WebViewViewController: UIViewController {
     
     //MARK: - Private Methods
     
-    private func updateProgress() {
-        progressView.setProgress(Float(webView.estimatedProgress), animated: true)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1) <= 0.0001
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
     }
     
-    private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else { return }
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirecrtURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Constants.accessScope)
-        ]
-        
-        guard let url = urlComponents.url else {
-            print ("WebViewViewController(56) - Failed to create URL for loadAuthView")
-            return
-        }
-        let request = URLRequest(url: url)
-        webView.load(request)
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
     
     private func configureProgressView() {
         progressView.progressViewStyle = .default
         progressView.progressTintColor = .black
-        
     }
     
     private func addAllSubviews() {
@@ -107,18 +110,10 @@ class WebViewViewController: UIViewController {
 extension WebViewViewController: WKNavigationDelegate {
     
     func code(from navigationAction: WKNavigationAction) -> String? {
-        
-        if
-            let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: {$0.name == "code"})
-        {
-            return codeItem.value
-        } else {
-            return nil
+        if let url = navigationAction.request.url {
+            return presenter?.code(from: url)
         }
+        return nil
     }
     
     func webView(

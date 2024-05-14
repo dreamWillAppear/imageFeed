@@ -4,6 +4,7 @@ import Kingfisher
 final class SingleImageViewController: UIViewController {
     
     //MARK: - Public Properties
+    
     var urlForSingleImageView: URL?
     lazy var image = UIImage()
     
@@ -49,12 +50,12 @@ final class SingleImageViewController: UIViewController {
         imageView.kf.setImage(with: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
-                case .success (let imageResult):
-                    self.rescaleAndCenterImageInScrollView(image: imageResult.image)
-                    UIBlockingProgressHUD.dismiss()
-                case .failure(_):
-                    UIBlockingProgressHUD.dismiss()
-                    showError()
+            case .success (let imageResult):
+                self.rescaleAndCenterImageInScrollView(image: imageResult.image)
+                UIBlockingProgressHUD.dismiss()
+            case .failure(_):
+                UIBlockingProgressHUD.dismiss()
+                showError()
             }
         }
     }

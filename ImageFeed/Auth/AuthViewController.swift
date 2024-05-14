@@ -2,6 +2,10 @@ import UIKit
 import ProgressHUD
 import SwiftKeychainWrapper
 
+protocol AuthViewControllerDelegateProtocol: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController)
+}
+
 final class AuthViewController: UIViewController {
     
     //MARK: - Public Properties
@@ -10,7 +14,7 @@ final class AuthViewController: UIViewController {
     
     //MARK: - Private Properties
     
-    private let webViewController = WebViewViewController()
+    private let webViewViewController = WebViewViewController()
     private let oAuth2Service = OAuth2Service.shared
     
     //MARK: - Public Methods
@@ -19,9 +23,14 @@ final class AuthViewController: UIViewController {
         if segue.identifier == "showWebView" {
             guard
                 let webViewViewController = segue.destination as? WebViewViewController
-            else  { fatalError("AuthViewController (19) - Failed to prepare segue") }
+            else  {
+                fatalError("AuthViewController (19) - Failed to prepare segue")
+            }
+            let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
             webViewViewController.delegate = self
-            
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -60,17 +69,17 @@ extension AuthViewController: WebViewViewControllerDelegateProtocol {
             
             UIBlockingProgressHUD.dismiss()
             switch result {
-                case .success(let token):
-                    KeychainWrapper.standard.set(token, forKey: "Auth token")
-                    let isSuccess = KeychainWrapper.standard.set(token, forKey: "Auth token")
-                    guard isSuccess else {
-                        print("AuthViewController webViewViewController (33) -  Failed to write access token to Keychain!")
-                        return
-                    }
-                    self.delegate?.didAuthenticate(self)
-                case .failure(let error):
-                    print("AuthViewController webViewViewController (33) - Token request failed: \(String(describing: error))")
-                    present(showAuthErrorAlert(), animated: true)
+            case .success(let token):
+                KeychainWrapper.standard.set(token, forKey: "Auth token")
+                let isSuccess = KeychainWrapper.standard.set(token, forKey: "Auth token")
+                guard isSuccess else {
+                    print("AuthViewController webViewViewController (33) -  Failed to write access token to Keychain!")
+                    return
+                }
+                self.delegate?.didAuthenticate(self)
+            case .failure(let error):
+                print("AuthViewController webViewViewController (33) - Token request failed: \(String(describing: error))")
+                present(showAuthErrorAlert(), animated: true)
             }
         }
     }

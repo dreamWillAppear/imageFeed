@@ -53,13 +53,13 @@ final class ProfileImageService {
             guard let self = self else { return }
             
             switch result {
-                case .success(let responseBody):
-                    let profileImage = responseBody
-                    self.profileImage = profileImage
-                    self.profileImageURL = profileImage.profileImage.large
-                    completion(.success(profileImage.profileImage.large))
-                case .failure(let error):
-                    completion(.failure(error))
+            case .success(let responseBody):
+                let profileImage = responseBody
+                self.profileImage = profileImage
+                self.profileImageURL = profileImage.profileImage.large
+                completion(.success(profileImage.profileImage.large))
+            case .failure(let error):
+                completion(.failure(error))
             }
             self.taskIsActive = false
         }
